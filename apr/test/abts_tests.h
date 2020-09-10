@@ -27,7 +27,9 @@ const struct testlist {
     {testdir},
     {testdso},
     {testdup},
+    {testencode},
     {testenv},
+    {testescape},
     {testfile},
     {testfilecopy},
     {testfileinfo},
@@ -66,7 +68,8 @@ const struct testlist {
     {testtime},
     {testud},
     {testuser},
-    {testvsn}
+    {testvsn},
+    {testskiplist}
 };
 
 #endif /* APR_TEST_INCLUDES */

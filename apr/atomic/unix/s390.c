@@ -20,7 +20,11 @@
 
 APR_DECLARE(apr_status_t) apr_atomic_init(apr_pool_t *p)
 {
+#if defined (NEED_ATOMICS_GENERIC64)
+    return apr__atomic_generic64_init(p);
+#else
     return APR_SUCCESS;
+#endif
 }
 
 APR_DECLARE(apr_uint32_t) apr_atomic_read32(volatile apr_uint32_t *mem)
@@ -38,10 +42,10 @@ static APR_INLINE apr_uint32_t atomic_add(volatile apr_uint32_t *mem, apr_uint32
     apr_uint32_t prev = *mem, temp;
 
     asm volatile ("loop_%=:\n"
-                  "	lr  %1,%0\n"
-                  "	alr %1,%3\n"
-                  "	cs  %0,%1,%2\n"
-                  "	jl  loop_%=\n"
+                  "    lr  %1,%0\n"
+                  "    alr %1,%3\n"
+                  "    cs  %0,%1,%2\n"
+                  "    jl  loop_%=\n"
                   : "+d" (prev), "+d" (temp), "=Q" (*mem)
                   : "d" (val), "m" (*mem)
                   : "cc", "memory");
@@ -64,10 +68,10 @@ static APR_INLINE apr_uint32_t atomic_sub(volatile apr_uint32_t *mem, apr_uint32
     apr_uint32_t prev = *mem, temp;
 
     asm volatile ("loop_%=:\n"
-                  "	lr  %1,%0\n"
-                  "	slr %1,%3\n"
-                  "	cs  %0,%1,%2\n"
-                  "	jl  loop_%=\n"
+                  "    lr  %1,%0\n"
+                  "    slr %1,%3\n"
+                  "    cs  %0,%1,%2\n"
+                  "    jl  loop_%=\n"
                   : "+d" (prev), "+d" (temp), "=Q" (*mem)
                   : "d" (val), "m" (*mem)
                   : "cc", "memory");
@@ -88,7 +92,7 @@ APR_DECLARE(int) apr_atomic_dec32(volatile apr_uint32_t *mem)
 APR_DECLARE(apr_uint32_t) apr_atomic_cas32(volatile apr_uint32_t *mem, apr_uint32_t with,
                                            apr_uint32_t cmp)
 {
-    asm volatile ("	cs  %0,%2,%1\n"
+    asm volatile ("    cs  %0,%2,%1\n"
                   : "+d" (cmp), "=Q" (*mem)
                   : "d" (with), "m" (*mem)
                   : "cc", "memory");
@@ -101,8 +105,8 @@ APR_DECLARE(apr_uint32_t) apr_atomic_xchg32(volatile apr_uint32_t *mem, apr_uint
     apr_uint32_t prev = *mem;
 
     asm volatile ("loop_%=:\n"
-                  "	cs  %0,%2,%1\n"
-                  "	jl  loop_%=\n"
+                  "    cs  %0,%2,%1\n"
+                  "    jl  loop_%=\n"
                   : "+d" (prev), "=Q" (*mem)
                   : "d" (val), "m" (*mem)
                   : "cc", "memory");
@@ -114,12 +118,12 @@ APR_DECLARE(void*) apr_atomic_casptr(volatile void **mem, void *with, const void
 {
     void *prev = (void *) cmp;
 #if APR_SIZEOF_VOIDP == 4
-    asm volatile ("	cs  %0,%2,%1\n"
+    asm volatile ("    cs  %0,%2,%1\n"
                   : "+d" (prev), "=Q" (*mem)
                   : "d" (with), "m" (*mem)
                   : "cc", "memory");
 #elif APR_SIZEOF_VOIDP == 8
-    asm volatile ("	csg %0,%2,%1\n"
+    asm volatile ("    csg %0,%2,%1\n"
                   : "+d" (prev), "=Q" (*mem)
                   : "d" (with), "m" (*mem)
                   : "cc", "memory");
@@ -134,15 +138,15 @@ APR_DECLARE(void*) apr_atomic_xchgptr(volatile void **mem, void *with)
     void *prev = (void *) *mem;
 #if APR_SIZEOF_VOIDP == 4
     asm volatile ("loop_%=:\n"
-                  "	cs  %0,%2,%1\n"
-                  "	jl  loop_%=\n"
+                  "    cs  %0,%2,%1\n"
+                  "    jl  loop_%=\n"
                   : "+d" (prev), "=Q" (*mem)
                   : "d" (with), "m" (*mem)
                   : "cc", "memory");
 #elif APR_SIZEOF_VOIDP == 8
     asm volatile ("loop_%=:\n"
-                  "	csg %0,%2,%1\n"
-                  "	jl  loop_%=\n"
+                  "    csg %0,%2,%1\n"
+                  "    jl  loop_%=\n"
                   : "+d" (prev), "=Q" (*mem)
                   : "d" (with), "m" (*mem)
                   : "cc", "memory");

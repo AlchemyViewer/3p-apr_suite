@@ -35,11 +35,12 @@ int main(void)
 }
 #else /* !APR_HAS_THREADS */
 
-#define MAX_COUNTER 1000000
+#define DEFAULT_MAX_COUNTER 1000000
 #define MAX_THREADS 6
 
 static int verbose = 0;
 static long mutex_counter;
+static long max_counter = DEFAULT_MAX_COUNTER;
 
 static apr_thread_mutex_t *thread_lock;
 void * APR_THREAD_FUNC thread_mutex_func(apr_thread_t *thd, void *data);
@@ -58,8 +59,13 @@ void * APR_THREAD_FUNC thread_mutex_func(apr_thread_t *thd, void *data)
 {
     int i;
 
-    for (i = 0; i < MAX_COUNTER; i++) {
-        apr_thread_mutex_lock(thread_lock);
+    for (i = 0; i < max_counter; i++) {
+        if (data) {
+            apr_thread_mutex_timedlock(thread_lock, *(apr_interval_time_t *)data);
+        }
+        else {
+            apr_thread_mutex_lock(thread_lock);
+        }
         mutex_counter++;
         apr_thread_mutex_unlock(thread_lock);
     }
@@ -70,7 +76,7 @@ void * APR_THREAD_FUNC thread_rwlock_func(apr_thread_t *thd, void *data)
 {
     int i;
 
-    for (i = 0; i < MAX_COUNTER; i++) {
+    for (i = 0; i < max_counter; i++) {
         apr_thread_rwlock_wrlock(thread_rwlock);
         mutex_counter++;
         apr_thread_rwlock_unlock(thread_rwlock);
@@ -120,7 +126,7 @@ int test_thread_mutex(int num_threads)
     time_stop = apr_time_now();
     printf("microseconds: %" APR_INT64_T_FMT " usec\n",
            (time_stop - time_start));
-    if (mutex_counter != MAX_COUNTER * num_threads)
+    if (mutex_counter != max_counter * num_threads)
         printf("error: counter = %ld\n", mutex_counter);
 
     return APR_SUCCESS;
@@ -168,7 +174,58 @@ int test_thread_mutex_nested(int num_threads)
     time_stop = apr_time_now();
     printf("microseconds: %" APR_INT64_T_FMT " usec\n",
            (time_stop - time_start));
-    if (mutex_counter != MAX_COUNTER * num_threads)
+    if (mutex_counter != max_counter * num_threads)
+        printf("error: counter = %ld\n", mutex_counter);
+
+    return APR_SUCCESS;
+}
+
+static int test_thread_mutex_timed(int num_threads)
+{
+    apr_thread_t *t[MAX_THREADS];
+    apr_status_t s[MAX_THREADS];
+    apr_time_t time_start, time_stop;
+    apr_time_t timeout;
+    int i;
+
+    mutex_counter = 0;
+
+    timeout = apr_time_from_sec(5);
+
+    printf("apr_thread_mutex_t Tests\n");
+    printf("%-60s", "    Initializing the apr_thread_mutex_t (TIMED)");
+    s[0] = apr_thread_mutex_create(&thread_lock, APR_THREAD_MUTEX_TIMED, pool);
+    if (s[0] != APR_SUCCESS) {
+        printf("Failed!\n");
+        return s[0];
+    }
+    printf("OK\n");
+
+    apr_thread_mutex_lock(thread_lock);
+    /* set_concurrency(4)? -aaron */
+    printf("    Starting %d threads    ", num_threads); 
+    for (i = 0; i < num_threads; ++i) {
+        s[i] = apr_thread_create(&t[i], NULL, thread_mutex_func, &timeout, pool);
+        if (s[i] != APR_SUCCESS) {
+            printf("Failed!\n");
+            return s[i];
+        }
+    }
+    printf("OK\n");
+
+    time_start = apr_time_now();
+    apr_thread_mutex_unlock(thread_lock);
+
+    /* printf("%-60s", "    Waiting for threads to exit"); */
+    for (i = 0; i < num_threads; ++i) {
+        apr_thread_join(&s[i], t[i]);
+    }
+    /* printf("OK\n"); */
+
+    time_stop = apr_time_now();
+    printf("microseconds: %" APR_INT64_T_FMT " usec\n",
+           (time_stop - time_start));
+    if (mutex_counter != max_counter * num_threads)
         printf("error: counter = %ld\n", mutex_counter);
 
     return APR_SUCCESS;
@@ -216,7 +273,7 @@ int test_thread_rwlock(int num_threads)
     time_stop = apr_time_now();
     printf("microseconds: %" APR_INT64_T_FMT " usec\n",
            (time_stop - time_start));
-    if (mutex_counter != MAX_COUNTER * num_threads)
+    if (mutex_counter != max_counter * num_threads)
         printf("error: counter = %ld\n", mutex_counter);
 
     return APR_SUCCESS;
@@ -226,7 +283,6 @@ int main(int argc, const char * const *argv)
 {
     apr_status_t rv;
     char errmsg[200];
-    const char *lockname = "multi.lock";
     apr_getopt_t *opt;
     char optchar;
     const char *optarg;
@@ -245,12 +301,12 @@ int main(int argc, const char * const *argv)
         exit(-1);
     }
         
-    while ((rv = apr_getopt(opt, "vf:", &optchar, &optarg)) == APR_SUCCESS) {
-        if (optchar == 'v') {
-            verbose = 1;
+    while ((rv = apr_getopt(opt, "c:v", &optchar, &optarg)) == APR_SUCCESS) {
+        if (optchar == 'c') {
+            max_counter = atol(optarg);
         }
-        if (optchar == 'f') {
-            lockname = optarg;
+        else if (optchar == 'v') {
+            verbose = 1;
         }
     }
 
@@ -271,6 +327,12 @@ int main(int argc, const char * const *argv)
             fprintf(stderr,"thread_mutex (NESTED) test failed : [%d] %s\n",
                     rv, apr_strerror(rv, (char*)errmsg, 200));
             exit(-4);
+        }
+
+        if ((rv = test_thread_mutex_timed(i)) != APR_SUCCESS) {
+            fprintf(stderr,"thread_mutex (TIMED) test failed : [%d] %s\n",
+                    rv, apr_strerror(rv, (char*)errmsg, 200));
+            exit(-5);
         }
 
         if ((rv = test_thread_rwlock(i)) != APR_SUCCESS) {

@@ -325,7 +325,7 @@ static int dbd_mysql_get_row(apr_pool_t *pool, apr_dbd_results_t *res,
         (*row)->len = mysql_fetch_lengths(res->res);
     }
     else {
-        apr_pool_cleanup_run(pool, res->res, free_result);
+        apr_pool_cleanup_run(res->pool, res->res, free_result);
     }
     return ret;
 }
@@ -1050,9 +1050,9 @@ static int dbd_mysql_end_transaction(apr_dbd_transaction_t *trans)
         else {
             ret = mysql_commit(trans->handle->conn);
         }
+        ret |= mysql_autocommit(trans->handle->conn, 1);
+        trans->handle->trans = NULL;
     }
-    ret |= mysql_autocommit(trans->handle->conn, 1);
-    trans->handle->trans = NULL;
     return ret;
 }
 /* Whether or not transactions work depends on whether the
