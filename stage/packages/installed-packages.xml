@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<llsd>
-<map>
-    <key>type</key>
-    <string>autobuild</string>
-    <key>version</key>
-    <string>1.2</string>
-  </map>
-</llsd>
