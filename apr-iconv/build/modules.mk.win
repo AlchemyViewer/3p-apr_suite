@@ -167,7 +167,7 @@ CFG_OUTPUT  = x64\LibR\iconv
 
 !IF "$(BIND_MODE)" == "shared"
 API_LIBS = $(APR_SOURCE)\x64\Debug\libapr-1.lib \
-	   $(API_SOURCE)\Debug\libapriconv-1.lib
+	   $(API_SOURCE)\x64\Debug\libapriconv-1.lib
 CFG_CFLAGS  = /MDd /Zi /Od /EHsc /D "_DEBUG"
 CFG_LDFLAGS = /debug /incremental:no /machine:X64
 CFG_OUTPUT  = Debug\iconv
