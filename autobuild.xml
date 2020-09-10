@@ -70,9 +70,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>c509f8afa1e02f4c16232cce7f6855f8</string>
+              <string>4f6ce988932eb420afdb4eacd75dbce8</string>
+              <key>hash_algorithm</key>
+              <string>md5</string>
               <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/ct2/55056/512080/expat-2.1.1.538990-windows-538990.tar.bz2</string>
+              <string>https://pkg.alchemyviewer.org/repository/autobuild-external/expat/windows/expat-2.2.9.323-windows-323.tar.bz2</string>
             </map>
             <key>name</key>
             <string>windows</string>
@@ -82,16 +84,18 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>aba97cfdf44c04dbfcac89c7cb472580</string>
+              <string>49dc81485705a32d345b4af6dab4ac1c</string>
+              <key>hash_algorithm</key>
+              <string>md5</string>
               <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/ct2/55054/512068/expat-2.1.1.538990-windows64-538990.tar.bz2</string>
+              <string>https://pkg.alchemyviewer.org/repository/autobuild-external/expat/windows64/expat-2.2.9.323-windows64-323.tar.bz2</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>2.1.1.538990</string>
+        <string>2.2.9.323</string>
       </map>
     </map>
     <key>package_description</key>
