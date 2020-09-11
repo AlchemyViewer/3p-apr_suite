@@ -97,25 +97,25 @@
     <OutDir>.\Release\</OutDir>
     <IntDir>.\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <LibraryPath>../apr/release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\x64\Debug\</OutDir>
     <IntDir>.\x64\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/x64/debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\Debug\</OutDir>
     <IntDir>.\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr\debug;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <LibraryPath>../apr/debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\x64\Release\</OutDir>
     <IntDir>.\x64\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/x64/release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -159,8 +159,8 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\libapriconv-1.dll</OutputFile>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <OutputFile>.\Release\libapriconv-1.dll</OutputFile>
       <ImportLibrary>Release\libapriconv-1.lib</ImportLibrary>
       <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -210,11 +210,11 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>x64\Debug\libapriconv-1.dll</OutputFile>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <OutputFile>.\x64\Debug\libapriconv-1.dll</OutputFile>
       <ImportLibrary>x64\Debug\libapriconv-1.lib</ImportLibrary>
       <BaseAddress>0x6EE50000</BaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -260,7 +260,7 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>.\Debug\libapriconv-1.dll</OutputFile>
       <ImportLibrary>Debug\libapriconv-1.lib</ImportLibrary>
       <BaseAddress>0x6EE50000</BaseAddress>
@@ -311,15 +311,14 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>x64\Release\libapriconv-1.dll</OutputFile>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <OutputFile>.\x64\Release\libapriconv-1.dll</OutputFile>
       <ImportLibrary>x64\Release\libapriconv-1.lib</ImportLibrary>
       <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>..\apr\x64\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

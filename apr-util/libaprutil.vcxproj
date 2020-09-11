@@ -97,24 +97,25 @@
     <OutDir>.\x64\Debug\</OutDir>
     <IntDir>.\x64\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>../apr/x64/Debug;../apr-iconv/x64/Debug;..\stage\packages\lib\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\Release\</OutDir>
     <IntDir>.\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;../apr/Release;../apr-iconv/Release;../stage/packages/lib/release/</LibraryPath>
+    <LibraryPath>../apr/Release;../apr-iconv/Release;../stage/packages/lib/release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\x64\Release\</OutDir>
     <IntDir>.\x64\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;../apr/Release;../apr-iconv/Release;../stage/packages/lib/release/</LibraryPath>
+    <LibraryPath>../apr/x64/Release;../apr-iconv/x64/Release;../stage/packages/lib/release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\Debug\</OutDir>
     <IntDir>.\Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib\winv6.3\um\x86;$(FrameworkSDKDir)\lib;../apr/Debug;../apr-iconv/Debug;../stage/packages/lib/debug</LibraryPath>
+    <LibraryPath>../apr/Debug;../apr-iconv/Debug;../stage/packages/lib/debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -159,9 +160,11 @@
       <OutputFile>x64\Debug\libaprutil-1.dll</OutputFile>
       <ImportLibrary>x64\Debug\libaprutil-1.lib</ImportLibrary>
       <BaseAddress>0x6EE60000</BaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -208,7 +211,7 @@
       <OutputFile>Release\libaprutil-1.dll</OutputFile>
       <ImportLibrary>Release\libaprutil-1.lib</ImportLibrary>
       <BaseAddress>0x6EE60000</BaseAddress>
-      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatMT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
@@ -259,11 +262,10 @@
       <OutputFile>x64\Release\libaprutil-1.dll</OutputFile>
       <ImportLibrary>x64\Release\libaprutil-1.lib</ImportLibrary>
       <BaseAddress>0x6EE60000</BaseAddress>
-      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatMT.lib;xml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>..\apr\x64\Release;..\apr-iconv\x64\Release;..\stage\packages\lib\release;..\apr-util\xml\expat\lib\x64\LibR</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -309,7 +311,7 @@
       <OutputFile>Debug\libaprutil-1.dll</OutputFile>
       <ImportLibrary>Debug\libaprutil-1.lib</ImportLibrary>
       <BaseAddress>0x6EE60000</BaseAddress>
-      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatMT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
     </Link>
