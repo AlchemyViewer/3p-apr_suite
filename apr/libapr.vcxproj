@@ -253,7 +253,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>Debug\libapr-1.dll</OutputFile>
       <ImportLibrary>Debug\libapr-1.lib</ImportLibrary>
-      <BaseAddress>0x6EEC0000</BaseAddress>
       <AdditionalDependencies>ws2_32.lib;mswsock.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
@@ -302,7 +301,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x64\Release\libapr-1.dll</OutputFile>
       <ImportLibrary>x64\Release\libapr-1.lib</ImportLibrary>
-      <BaseAddress>0x6EEC0000</BaseAddress>
       <AdditionalDependencies>ws2_32.lib;mswsock.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
@@ -322,7 +320,6 @@
       <AssemblerListingLocation>.\x64\Debug\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\x64\Debug\libapr.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>$(IntDir)libapr_src</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
@@ -348,10 +345,9 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>x64\Debug\libapr-1.dll</OutputFile>
       <ImportLibrary>x64\Debug\libapr-1.lib</ImportLibrary>
-      <BaseAddress>0x6EEC0000</BaseAddress>
       <AdditionalDependencies>ws2_32.lib;mswsock.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
@@ -450,7 +446,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>Release\libapr-1.dll</OutputFile>
       <ImportLibrary>Release\libapr-1.lib</ImportLibrary>
-      <BaseAddress>0x6EEC0000</BaseAddress>
       <AdditionalDependencies>ws2_32.lib;mswsock.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>

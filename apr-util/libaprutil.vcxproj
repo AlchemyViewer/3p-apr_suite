@@ -159,7 +159,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x64\Debug\libaprutil-1.dll</OutputFile>
       <ImportLibrary>x64\Debug\libaprutil-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE60000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
@@ -210,7 +209,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>Release\libaprutil-1.dll</OutputFile>
       <ImportLibrary>Release\libaprutil-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE60000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
@@ -261,7 +259,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x64\Release\libaprutil-1.dll</OutputFile>
       <ImportLibrary>x64\Release\libaprutil-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE60000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpat.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
@@ -310,7 +307,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>Debug\libaprutil-1.dll</OutputFile>
       <ImportLibrary>Debug\libaprutil-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE60000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <SubSystem>Windows</SubSystem>

@@ -162,7 +162,6 @@
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>.\Release\libapriconv-1.dll</OutputFile>
       <ImportLibrary>Release\libapriconv-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
@@ -213,7 +212,6 @@
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>.\x64\Debug\libapriconv-1.dll</OutputFile>
       <ImportLibrary>x64\Debug\libapriconv-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
@@ -263,7 +261,6 @@
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>.\Debug\libapriconv-1.dll</OutputFile>
       <ImportLibrary>Debug\libapriconv-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
@@ -314,7 +311,6 @@
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <OutputFile>.\x64\Release\libapriconv-1.dll</OutputFile>
       <ImportLibrary>x64\Release\libapriconv-1.lib</ImportLibrary>
-      <BaseAddress>0x6EE50000</BaseAddress>
       <AdditionalDependencies>libapr-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
