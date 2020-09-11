@@ -37,7 +37,7 @@
  FILEFLAGS 0x00L
 #endif
 #endif
-#if defined(WINNT) || defined(WIN64)
+#if defined(WINNT) || defined(_WIN64)
  FILEOS 0x40004L
 #else
  FILEOS 0x4L
