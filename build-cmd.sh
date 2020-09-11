@@ -75,7 +75,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
     if [ "$AUTOBUILD_ADDRSIZE" = 32 ]
       then 
-        bitdir=""
+        bitdir="/Win32"
       else
         bitdir="/x64"
     fi
@@ -88,9 +88,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
     mkdir -p "$DEBUG_OUT_DIR" || echo "$DEBUG_OUT_DIR exists"
 
-    cp "apr$bitdir/Debug/libapr-1."{lib,dll} "$DEBUG_OUT_DIR"
-    cp "apr-iconv$bitdir/Debug/libapriconv-1."{lib,dll} "$DEBUG_OUT_DIR"
-    cp "apr-util$bitdir/Debug/libaprutil-1."{lib,dll} "$DEBUG_OUT_DIR"
+    cp "apr$bitdir/Debug/libapr-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
+    cp "apr-iconv$bitdir/Debug/libapriconv-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
+    cp "apr-util$bitdir/Debug/libaprutil-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
 
     for proj in libapr libaprutil libapriconv
       do build_sln "apr-util/aprutil.sln" "Release" "$AUTOBUILD_WIN_VSPLATFORM" "$proj"
@@ -98,9 +98,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
     mkdir -p "$RELEASE_OUT_DIR" || echo "$RELEASE_OUT_DIR exists"
 
-    cp "apr$bitdir/Release/libapr-1."{lib,dll} "$RELEASE_OUT_DIR"
-    cp "apr-iconv$bitdir/Release/libapriconv-1."{lib,dll} "$RELEASE_OUT_DIR"
-    cp "apr-util$bitdir/Release/libaprutil-1."{lib,dll} "$RELEASE_OUT_DIR"
+    cp "apr$bitdir/Release/libapr-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
+    cp "apr-iconv$bitdir/Release/libapriconv-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
+    cp "apr-util$bitdir/Release/libaprutil-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
 
     INCLUDE_DIR="$STAGING_DIR/include/apr-1"
     mkdir -p "$INCLUDE_DIR"      || echo "$INCLUDE_DIR exists"
