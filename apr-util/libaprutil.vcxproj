@@ -104,7 +104,7 @@
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/Release;../apr-iconv/Release;../stage/packages/lib/release/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/Win32/Release;../apr-iconv/Win32/Release;../stage/packages/lib/release/;$(LibraryPath)</LibraryPath>
     <TargetName>libaprutil-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -118,7 +118,7 @@
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/Debug;../apr-iconv/Debug;../stage/packages/lib/debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/Win32/Debug;../apr-iconv/Win32/Debug;../stage/packages/lib/debug;$(LibraryPath)</LibraryPath>
     <TargetName>libaprutil-1</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

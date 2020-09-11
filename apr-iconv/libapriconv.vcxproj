@@ -97,7 +97,7 @@
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/win32/release;$(LibraryPath)</LibraryPath>
     <TargetName>libapriconv-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,7 +111,7 @@
     <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>../apr/debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../apr/Win32/debug;$(LibraryPath)</LibraryPath>
     <TargetName>libapriconv-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

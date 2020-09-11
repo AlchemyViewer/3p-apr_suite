@@ -18,8 +18,8 @@ BIND_MODE  = shared
  || "$(BUILD_MODE)" == "Win32 Release"
 
 !IF "$(BIND_MODE)" == "shared"
-API_LIBS = $(APR_SOURCE)\Release\libapr-1.lib \
-	   $(API_SOURCE)\Release\libapriconv-1.lib
+API_LIBS = $(APR_SOURCE)\Win32\Release\libapr-1.lib \
+	   $(API_SOURCE)\Win32\Release\libapriconv-1.lib
 CFG_CFLAGS  = /MD /Zi /O2 /Oy- /D "NDEBUG"
 CFG_LDFLAGS = /debug /opt:ref /incremental:no /machine:X86
 CFG_OUTPUT  = Release\iconv
@@ -40,8 +40,8 @@ CFG_OUTPUT  = LibR\iconv
      || "$(BUILD_MODE)" == "Win32 Debug"
 
 !IF "$(BIND_MODE)" == "shared"
-API_LIBS = $(APR_SOURCE)\Debug\libapr-1.lib \
-	   $(API_SOURCE)\Debug\libapriconv-1.lib
+API_LIBS = $(APR_SOURCE)\Win32\Debug\libapr-1.lib \
+	   $(API_SOURCE)\Win32\Debug\libapriconv-1.lib
 CFG_CFLAGS  = /MDd /Zi /Od /EHsc /D "_DEBUG"
 CFG_LDFLAGS = /debug /incremental:no /machine:X86
 CFG_OUTPUT  = Debug\iconv
