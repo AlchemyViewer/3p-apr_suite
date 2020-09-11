@@ -40,6 +40,7 @@ echo "${version}.${build}" > "${STAGING_DIR}/VERSION.txt"
 case "$AUTOBUILD_PLATFORM" in
   windows*)
     pushd "$TOP_DIR"
+    DEBUG_OUT_DIR="$STAGING_DIR/lib/debug"
     RELEASE_OUT_DIR="$STAGING_DIR/lib/release"
 
     load_vsvars
@@ -72,23 +73,31 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     cygpath -p -m "$PATH" | tr ';' '\n'
     python -c "print(' ${#PATH} chars in PATH '.center(72, '='))"
 
-    which nmake
-
-    for proj in apr aprutil apriconv xml libapr  libaprutil libapriconv
-      do build_sln "apr-util/aprutil.sln" "Release|$AUTOBUILD_WIN_VSPLATFORM" "$proj"
-    done
-
-    mkdir -p "$RELEASE_OUT_DIR" || echo "$RELEASE_OUT_DIR exists"
-
     if [ "$AUTOBUILD_ADDRSIZE" = 32 ]
       then 
         bitdir=""
       else
         bitdir="/x64"
     fi
-    cp "apr$bitdir/LibR/apr-1.lib" "$RELEASE_OUT_DIR"
-    cp "apr-util$bitdir/LibR/aprutil-1.lib" "$RELEASE_OUT_DIR"
-    cp "apr-iconv$bitdir/LibR/apriconv-1.lib" "$RELEASE_OUT_DIR"
+
+    which nmake
+
+    for proj in libapr libaprutil libapriconv
+      do build_sln "apr-util/aprutil.sln" "Debug" "$AUTOBUILD_WIN_VSPLATFORM" "$proj"
+    done
+
+    mkdir -p "$DEBUG_OUT_DIR" || echo "$DEBUG_OUT_DIR exists"
+
+    cp "apr$bitdir/Debug/libapr-1."{lib,dll} "$DEBUG_OUT_DIR"
+    cp "apr-iconv$bitdir/Debug/libapriconv-1."{lib,dll} "$DEBUG_OUT_DIR"
+    cp "apr-util$bitdir/Debug/libaprutil-1."{lib,dll} "$DEBUG_OUT_DIR"
+
+    for proj in libapr libaprutil libapriconv
+      do build_sln "apr-util/aprutil.sln" "Release" "$AUTOBUILD_WIN_VSPLATFORM" "$proj"
+    done
+
+    mkdir -p "$RELEASE_OUT_DIR" || echo "$RELEASE_OUT_DIR exists"
+
     cp "apr$bitdir/Release/libapr-1."{lib,dll} "$RELEASE_OUT_DIR"
     cp "apr-iconv$bitdir/Release/libapriconv-1."{lib,dll} "$RELEASE_OUT_DIR"
     cp "apr-util$bitdir/Release/libaprutil-1."{lib,dll} "$RELEASE_OUT_DIR"

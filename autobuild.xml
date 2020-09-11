@@ -208,6 +208,7 @@
           <array>
             <string>include/apr-1/arch/*.h</string>
             <string>include/apr-1/private/*.h</string>
+            <string>lib/debug/*</string>
             <string>lib/release/*</string>
           </array>
           <key>name</key>
