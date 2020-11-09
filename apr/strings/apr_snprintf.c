@@ -100,7 +100,6 @@ static char *apr_cvt(double arg, int ndigits, int *decpt, int *sign,
         arg = -arg;
     }
     arg = modf(arg, &fi);
-    p1 = &buf[NDIG];
     /*
      * Do integer part
      */
@@ -704,7 +703,7 @@ APR_DECLARE(int) apr_vformatter(int (*flush_func)(apr_vformatter_buff_t *),
     apr_int64_t i_quad = 0;
     apr_uint64_t ui_quad;
     apr_int32_t i_num = 0;
-    apr_uint32_t ui_num;
+    apr_uint32_t ui_num = 0;
 
     char num_buf[NUM_BUF_SIZE];
     char char_buf[2];                /* for printing %% and %<unknown> */
@@ -959,7 +958,7 @@ APR_DECLARE(int) apr_vformatter(int (*flush_func)(apr_vformatter_buff_t *),
                             &num_buf[NUM_BUF_SIZE], &s_len);
                 }
                 FIX_PRECISION(adjust_precision, precision, s, s_len);
-                if (alternate_form && i_num != 0) {
+                if (alternate_form && ui_num != 0) {
                     *--s = *fmt;        /* 'x' or 'X' */
                     *--s = '0';
                     s_len += 2;
@@ -1328,7 +1327,7 @@ APR_DECLARE(int) apr_vformatter(int (*flush_func)(apr_vformatter_buff_t *),
              */
             if (print_something == YES) {
                 for (i = s_len; i != 0; i--) {
-                      INS_CHAR(*s, sp, bep, cc);
+                    INS_CHAR(*s, sp, bep, cc);
                     s++;
                 }
             }

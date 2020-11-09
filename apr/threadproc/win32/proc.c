@@ -526,8 +526,8 @@ APR_DECLARE(apr_status_t) apr_proc_create(apr_proc_t *new,
     new->err = attr->parent_err;
 
     if (attr->detached) {
-        /* If we are creating ourselves detached, Then we should hide the
-         * window we are starting in.  And we had better redfine our
+        /* If we are creating ourselves detached, then we should hide the
+         * window we are starting in.  And we had better redefine our
          * handles for STDIN, STDOUT, and STDERR. Do not set the
          * detached attribute for Win9x. We have found that Win9x does
          * not manage the stdio handles properly when running old 16
@@ -569,7 +569,7 @@ APR_DECLARE(apr_status_t) apr_proc_create(apr_proc_t *new,
      * XXX progname must be NULL if this is a 16 bit app running in WOW
      */
     if (progname[0] == '\"') {
-        progname = apr_pstrndup(pool, progname + 1, strlen(progname) - 2);
+        progname = apr_pstrmemdup(pool, progname + 1, strlen(progname) - 2);
     }
 
     if (attr->cmdtype == APR_PROGRAM || attr->cmdtype == APR_PROGRAM_ENV) {
@@ -629,7 +629,7 @@ APR_DECLARE(apr_status_t) apr_proc_create(apr_proc_t *new,
             return APR_EINVAL;
         }
         if (shellcmd[0] == '"') {
-            progname = apr_pstrndup(pool, shellcmd + 1, strlen(shellcmd) - 2);
+            progname = apr_pstrmemdup(pool, shellcmd + 1, strlen(shellcmd) - 2);
         }
         else {
             progname = shellcmd;
@@ -671,7 +671,7 @@ APR_DECLARE(apr_status_t) apr_proc_create(apr_proc_t *new,
                 return APR_EINVAL;
             }
             if (shellcmd[0] == '"') {
-                progname = apr_pstrndup(pool, shellcmd + 1, strlen(shellcmd) - 2);
+                progname = apr_pstrmemdup(pool, shellcmd + 1, strlen(shellcmd) - 2);
             }
             else {
                 progname = shellcmd;
@@ -1520,6 +1520,14 @@ APR_DECLARE(apr_status_t) apr_proc_wait(apr_proc_t *proc,
 }
 
 APR_DECLARE(apr_status_t) apr_proc_detach(int daemonize)
+{
+    return APR_ENOTIMPL;
+}
+
+APR_DECLARE(apr_status_t) apr_procattr_perms_set_register(apr_procattr_t *attr,
+                                                 apr_perms_setfn_t *perms_set_fn,
+                                                 void *data,
+                                                 apr_fileperms_t perms)
 {
     return APR_ENOTIMPL;
 }

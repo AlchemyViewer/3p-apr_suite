@@ -20,7 +20,11 @@
 
 APR_DECLARE(apr_status_t) apr_atomic_init(apr_pool_t *p)
 {
+#if defined (NEED_ATOMICS_GENERIC64)
+    return apr__atomic_generic64_init(p);
+#else
     return APR_SUCCESS;
+#endif
 }
 
 APR_DECLARE(apr_uint32_t) apr_atomic_read32(volatile apr_uint32_t *mem)
@@ -117,7 +121,7 @@ APR_DECLARE(void*) apr_atomic_xchgptr(volatile void **mem, void *with)
 #elif APR_SIZEOF_VOIDP == 8
     asm volatile ("xchgq %q2, %1"
                   : "=a" (prev), "+m" (*mem)
-                  : "r" ((unsigned long)with));
+                  : "0" (with));
 #else
 #error APR_SIZEOF_VOIDP value not supported
 #endif

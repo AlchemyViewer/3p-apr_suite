@@ -81,7 +81,7 @@ APR_DECLARE(apr_status_t) apr_thread_cond_create(apr_thread_cond_t **cond,
 
 
 static apr_status_t do_wait(apr_thread_cond_t *cond, apr_thread_mutex_t *mutex,
-                            int timeout)
+                            apr_interval_time_t timeout)
 {
     struct waiter_t *wait;
     thread_id cth = find_thread(NULL);
@@ -113,10 +113,11 @@ static apr_status_t do_wait(apr_thread_cond_t *cond, apr_thread_mutex_t *mutex,
 
     apr_thread_mutex_lock(cond->condlock);
     
-    if (rv != B_OK)
+    if (rv != B_OK) {
         if (rv == B_TIMED_OUT)
             return APR_TIMEUP;
         return rv;       
+    }
 
     acquire_sem(cond->lock);
     APR_RING_REMOVE(wait, link);

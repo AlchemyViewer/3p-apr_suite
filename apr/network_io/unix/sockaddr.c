@@ -25,6 +25,14 @@
 #include <stdlib.h>
 #endif
 
+#ifdef HAVE_NET_IF_H
+#include <net/if.h>
+#endif
+
+#if defined(HAVE_IF_INDEXTONAME) && defined(_MSC_VER)
+#include "arch/win32/apr_arch_misc.h"
+#endif
+
 #define APR_WANT_STRFUNC
 #include "apr_want.h"
 
@@ -125,9 +133,31 @@ APR_DECLARE(apr_status_t) apr_sockaddr_ip_getbuf(char *buf, apr_size_t buflen,
         memmove(buf, buf + strlen("::ffff:"),
                 strlen(buf + strlen("::ffff:"))+1);
     }
-#endif
+
     /* ensure NUL termination if the buffer is too short */
     buf[buflen-1] = '\0';
+
+#ifdef HAVE_IF_INDEXTONAME
+    /* Append scope name for link-local addresses. */
+    if (sockaddr->family == AF_INET6
+        && IN6_IS_ADDR_LINKLOCAL((struct in6_addr *)sockaddr->ipaddr_ptr)) {
+        char scbuf[IF_NAMESIZE], *p = buf + strlen(buf);
+
+        if (if_indextoname(sockaddr->sa.sin6.sin6_scope_id, scbuf) == scbuf) {
+            /* Space check, need room for buf + '%' + scope + '\0'.
+             * Assert: buflen >= strlen(buf) + strlen(scbuf) + 2
+             * Equiv:  buflen >= (p-buf) + strlen(buf) + 2
+             * Thus, fail in inverse condition: */
+            if (buflen < strlen(scbuf) + (p - buf) + 2) {
+                return APR_ENOSPC;
+            }
+            *p++ = '%';
+            memcpy(p, scbuf, strlen(scbuf) + 1);
+        }
+    }    
+#endif /* HAVE_IF_INDEXTONAME */
+#endif /* APR_HAVE_IPV6 */
+
     return APR_SUCCESS;
 }
 
@@ -165,6 +195,14 @@ void apr_sockaddr_vars_set(apr_sockaddr_t *addr, int family, apr_port_t port)
         addr->addr_str_len = 46;
         addr->ipaddr_ptr = &(addr->sa.sin6.sin6_addr);
         addr->ipaddr_len = sizeof(struct in6_addr);
+    }
+#endif
+#if APR_HAVE_SOCKADDR_UN
+    else if (family == APR_UNIX) {
+        addr->salen = sizeof(struct sockaddr_un);
+        addr->addr_str_len = sizeof(addr->sa.unx.sun_path);;
+        addr->ipaddr_ptr = &(addr->sa.unx.sun_path);
+        addr->ipaddr_len = addr->addr_str_len;
     }
 #endif
 }
@@ -269,19 +307,13 @@ APR_DECLARE(apr_status_t) apr_parse_addr_port(char **addr,
                 return APR_EINVAL;
             }
             addrlen = scope_delim - str - 1;
-            *scope_id = apr_palloc(p, end_bracket - scope_delim);
-            memcpy(*scope_id, scope_delim + 1, end_bracket - scope_delim - 1);
-            (*scope_id)[end_bracket - scope_delim - 1] = '\0';
+            *scope_id = apr_pstrmemdup(p, scope_delim + 1, end_bracket - scope_delim - 1);
         }
         else {
             addrlen = addrlen - 2; /* minus 2 for '[' and ']' */
         }
 
-        *addr = apr_palloc(p, addrlen + 1);
-        memcpy(*addr,
-               str + 1,
-               addrlen);
-        (*addr)[addrlen] = '\0';
+        *addr = apr_pstrmemdup(p, str + 1, addrlen);
         if (apr_inet_pton(AF_INET6, *addr, &ipaddr) != 1) {
             *addr = NULL;
             *scope_id = NULL;
@@ -295,9 +327,7 @@ APR_DECLARE(apr_status_t) apr_parse_addr_port(char **addr,
         /* XXX If '%' is not a valid char in a DNS name, we *could* check 
          *     for bogus scope ids first.
          */
-        *addr = apr_palloc(p, addrlen + 1);
-        memcpy(*addr, str, addrlen);
-        (*addr)[addrlen] = '\0';
+        *addr = apr_pstrmemdup(p, str, addrlen);
     }
     return APR_SUCCESS;
 }
@@ -325,6 +355,16 @@ static apr_status_t call_resolver(apr_sockaddr_t **sa,
         hints.ai_flags = AI_ADDRCONFIG;
     }
 #endif
+
+#ifdef __MVS__
+    /* z/OS will not return IPv4 address under AF_UNSPEC if any IPv6 results 
+     * are returned, w/o AI_ALL. 
+     */
+    if (family == APR_UNSPEC) { 
+       hints.ai_flags |= AI_ALL;
+    }
+#endif
+
     if(hostname == NULL) {
 #ifdef AI_PASSIVE 
         /* If hostname is NULL, assume we are trying to bind to all
@@ -356,9 +396,27 @@ static apr_status_t call_resolver(apr_sockaddr_t **sa,
     }
     error = getaddrinfo(hostname, servname, &hints, &ai_list);
 #ifdef HAVE_GAI_ADDRCONFIG
-    if (error == EAI_BADFLAGS && family == APR_UNSPEC) {
-        /* Retry with no flags if AI_ADDRCONFIG was rejected. */
-        hints.ai_flags = 0;
+    /*
+     * Using AI_ADDRCONFIG involves some unfortunate guesswork because it
+     * does not consider loopback addresses when trying to determine if
+     * IPv4 or IPv6 is configured on a system (see RFC 3493).
+     * This is a problem if one actually wants to listen on or connect to
+     * the loopback address of a protocol family that is not otherwise
+     * configured on the system. See PR 52709.
+     * To work around some of the problems, retry without AI_ADDRCONFIG
+     * in case of EAI_ADDRFAMILY.
+     * XXX: apr_sockaddr_info_get() should really accept a flag to determine
+     * XXX: if AI_ADDRCONFIG's guesswork is wanted and if the address is
+     * XXX: to be used for listen() or connect().
+     *
+     * In case of EAI_BADFLAGS, AI_ADDRCONFIG is not supported.
+     */
+    if ((family == APR_UNSPEC) && (error == EAI_BADFLAGS
+#ifdef EAI_ADDRFAMILY
+                                   || error == EAI_ADDRFAMILY
+#endif
+                                                             )) {
+        hints.ai_flags &= ~AI_ADDRCONFIG;
         error = getaddrinfo(hostname, servname, &hints, &ai_list);
     }
 #endif
@@ -367,7 +425,7 @@ static apr_status_t call_resolver(apr_sockaddr_t **sa,
         return apr_get_netos_error();
 #else
         if (error == EAI_SYSTEM) {
-            return errno;
+            return errno ? errno : APR_EGENERAL;
         }
         else 
         {
@@ -422,6 +480,15 @@ static apr_status_t call_resolver(apr_sockaddr_t **sa,
         ai = ai->ai_next;
     }
     freeaddrinfo(ai_list);
+
+    if (prev_sa == NULL) {
+        /*
+         * getaddrinfo returned only useless entries and *sa is still empty.
+         * This should be treated as an error.
+         */
+        return APR_EGENERAL;
+    }
+
     return APR_SUCCESS;
 }
 
@@ -555,6 +622,11 @@ static apr_status_t find_addresses(apr_sockaddr_t **sa,
         ++curaddr;
     }
 
+    if (prev_sa == NULL) {
+        /* this should not happen but no result should be treated as error */
+        return APR_EGENERAL;
+    }
+
     return APR_SUCCESS;
 }
 
@@ -580,6 +652,33 @@ APR_DECLARE(apr_status_t) apr_sockaddr_info_get(apr_sockaddr_t **sa,
         }
 #endif
     }
+    if (family == APR_UNSPEC && hostname && *hostname == '/') {
+        family = APR_UNIX;
+    }
+    if (family == APR_UNIX) {
+#if APR_HAVE_SOCKADDR_UN
+        if (hostname && *hostname == '/') {
+            *sa = apr_pcalloc(p, sizeof(apr_sockaddr_t));
+            (*sa)->pool = p;
+            apr_cpystrn((*sa)->sa.unx.sun_path, hostname,
+                        sizeof((*sa)->sa.unx.sun_path));
+            (*sa)->hostname = apr_pstrdup(p, hostname);
+            (*sa)->family = APR_UNIX;
+            (*sa)->sa.unx.sun_family = APR_UNIX;
+            (*sa)->salen = sizeof(struct sockaddr_un);
+            (*sa)->addr_str_len = sizeof((*sa)->sa.unx.sun_path);
+            (*sa)->ipaddr_ptr = &((*sa)->sa.unx.sun_path);
+            (*sa)->ipaddr_len = (*sa)->addr_str_len;
+
+            return APR_SUCCESS;
+        }
+        else
+#endif
+        {
+            *sa = NULL;
+            return APR_ENOTIMPL;
+        }
+    }
 #if !APR_HAVE_IPV6
     /* What may happen is that APR is not IPv6-enabled, but we're still
      * going to call getaddrinfo(), so we have to tell the OS we only
@@ -592,6 +691,42 @@ APR_DECLARE(apr_status_t) apr_sockaddr_info_get(apr_sockaddr_t **sa,
 #endif
 
     return find_addresses(sa, hostname, family, port, flags, p);
+}
+
+APR_DECLARE(apr_status_t) apr_sockaddr_info_copy(apr_sockaddr_t **dst,
+                                                 const apr_sockaddr_t *src,
+                                                 apr_pool_t *p)
+{
+    apr_sockaddr_t *d;
+    const apr_sockaddr_t *s;
+
+    for (*dst = d = NULL, s = src; s; s = s->next) {
+        if (!d) {
+            *dst = d = apr_pmemdup(p, s, sizeof *s);
+        }
+        else {
+            d = d->next = apr_pmemdup(p, s, sizeof *s);
+        }
+        if (s->hostname) {
+            if (s == src || s->hostname != src->hostname) {
+                d->hostname = apr_pstrdup(p, s->hostname);
+            }
+            else {
+                d->hostname = (*dst)->hostname;
+            }
+        }
+        if (s->servname) {
+            if (s == src || s->servname != src->servname) {
+                d->servname = apr_pstrdup(p, s->servname);
+            }
+            else {
+                d->servname = (*dst)->servname;
+            }
+        }
+        d->pool = p;
+        apr_sockaddr_vars_set(d, s->family, s->port);
+    }
+    return APR_SUCCESS;
 }
 
 APR_DECLARE(apr_status_t) apr_getnameinfo(char **hostname,
@@ -632,6 +767,12 @@ APR_DECLARE(apr_status_t) apr_getnameinfo(char **hostname,
                          tmphostname, sizeof(tmphostname), NULL, 0,
                          flags != 0 ? flags : NI_NAMEREQD);
     }
+#if APR_HAVE_SOCKADDR_UN
+    else if (sockaddr->family == APR_UNIX) {
+        *hostname = sockaddr->hostname;
+        return APR_SUCCESS;
+    }
+#endif
     else
 #endif
     rc = getnameinfo((const struct sockaddr *)&sockaddr->sa, sockaddr->salen,
@@ -789,11 +930,19 @@ APR_DECLARE(apr_status_t) apr_getservbyname(apr_sockaddr_t *sockaddr,
          &((struct in6_addr *)(b)->ipaddr_ptr)->s6_addr[12],  \
          (a)->ipaddr_len))
 
+#if APR_HAVE_IPV6
+#define SCOPE_OR_ZERO(sa_) ((sa_)->family != AF_INET6 ? 0 :   \
+                            ((sa_)->sa.sin6.sin6_scope_id))
+#else
+#define SCOPE_OR_ZERO(sa_) (0)
+#endif
+
 APR_DECLARE(int) apr_sockaddr_equal(const apr_sockaddr_t *addr1,
                                     const apr_sockaddr_t *addr2)
 {
-    if (addr1->ipaddr_len == addr2->ipaddr_len &&
-        !memcmp(addr1->ipaddr_ptr, addr2->ipaddr_ptr, addr1->ipaddr_len)) {
+    if (addr1->ipaddr_len == addr2->ipaddr_len
+        && !memcmp(addr1->ipaddr_ptr, addr2->ipaddr_ptr, addr1->ipaddr_len)
+        && SCOPE_OR_ZERO(addr1) == SCOPE_OR_ZERO(addr2)) {
         return 1;
     }
 #if APR_HAVE_IPV6
@@ -805,6 +954,35 @@ APR_DECLARE(int) apr_sockaddr_equal(const apr_sockaddr_t *addr1,
     }
 #endif
     return 0; /* not equal */
+}
+
+APR_DECLARE(int) apr_sockaddr_is_wildcard(const apr_sockaddr_t *addr)
+{
+    static const char inaddr_any[
+#if APR_HAVE_IPV6
+        sizeof(struct in6_addr)
+#else
+        sizeof(struct in_addr)
+#endif
+    ] = {0};
+
+    if (addr->ipaddr_ptr /* IP address initialized */
+        && addr->ipaddr_len <= sizeof inaddr_any) { /* else bug elsewhere? */
+        if (!memcmp(inaddr_any, addr->ipaddr_ptr, addr->ipaddr_len)) {
+            return 1;
+        }
+#if APR_HAVE_IPV6
+    if (addr->family == AF_INET6
+        && IN6_IS_ADDR_V4MAPPED((struct in6_addr *)addr->ipaddr_ptr)) {
+        struct in_addr *v4 = (struct in_addr *)&((apr_uint32_t *)addr->ipaddr_ptr)[3];
+
+        if (!memcmp(inaddr_any, v4, sizeof *v4)) {
+            return 1;
+        }
+    }
+#endif
+    }
+    return 0;
 }
 
 static apr_status_t parse_network(apr_ipsubnet_t *ipsub, const char *network)
@@ -914,6 +1092,10 @@ static apr_status_t parse_ip(apr_ipsubnet_t *ipsub, const char *ipstr, int netwo
 
 static int looks_like_ip(const char *ipstr)
 {
+    if (strlen(ipstr) == 0) {
+        return 0;
+    }
+    
     if (strchr(ipstr, ':')) {
         /* definitely not a hostname; assume it is intended to be an IPv6 address */
         return 1;
@@ -1010,7 +1192,7 @@ APR_DECLARE(int) apr_ipsubnet_test(apr_ipsubnet_t *ipsub, apr_sockaddr_t *sa)
     /* XXX This line will segv on Win32 build with APR_HAVE_IPV6,
      * but without the IPV6 drivers installed.
      */
-    if (sa->sa.sin.sin_family == AF_INET) {
+    if (sa->family == AF_INET) {
         if (ipsub->family == AF_INET &&
             ((sa->sa.sin.sin_addr.s_addr & ipsub->mask[0]) == ipsub->sub[0])) {
             return 1;
@@ -1022,7 +1204,7 @@ APR_DECLARE(int) apr_ipsubnet_test(apr_ipsubnet_t *ipsub, apr_sockaddr_t *sa)
             return 1;
         }
     }
-    else {
+    else if (sa->family == AF_INET6 && ipsub->family == AF_INET6) {
         apr_uint32_t *addr = (apr_uint32_t *)sa->ipaddr_ptr;
 
         if ((addr[0] & ipsub->mask[0]) == ipsub->sub[0] &&
@@ -1038,4 +1220,65 @@ APR_DECLARE(int) apr_ipsubnet_test(apr_ipsubnet_t *ipsub, apr_sockaddr_t *sa)
     }
 #endif /* APR_HAVE_IPV6 */
     return 0; /* no match */
+}
+
+APR_DECLARE(apr_status_t) apr_sockaddr_zone_set(apr_sockaddr_t *sa,
+                                                const char *zone_id)
+{
+#if !APR_HAVE_IPV6 || !defined(HAVE_IF_NAMETOINDEX)
+    return APR_ENOTIMPL;
+#else
+    unsigned int idx;
+    
+    if (sa->family != APR_INET6
+        || !IN6_IS_ADDR_LINKLOCAL((struct in6_addr *)sa->ipaddr_ptr)) {
+        return APR_EBADIP;
+    }
+
+    idx = if_nametoindex(zone_id);
+    if (idx) {
+        sa->sa.sin6.sin6_scope_id = idx;
+        return APR_SUCCESS;
+    }
+
+    if (errno != ENODEV) {
+        return errno;
+    }
+    else {
+        char *endptr;
+        apr_int64_t i = apr_strtoi64(zone_id, &endptr, 10);
+
+        if (*endptr != '\0' || errno || i < 1 || i > APR_INT16_MAX) {
+            return APR_EGENERAL;
+        }
+
+        sa->sa.sin6.sin6_scope_id = (unsigned int) i;
+        return APR_SUCCESS;
+    }
+#endif
+}
+
+APR_DECLARE(apr_status_t) apr_sockaddr_zone_get(const apr_sockaddr_t *sa,
+                                                const char **name,
+                                                apr_uint32_t *id,
+                                                apr_pool_t *p)
+{
+#if !APR_HAVE_IPV6 || !defined(HAVE_IF_INDEXTONAME)
+    return APR_ENOTIMPL;
+#else
+    if (sa->family != APR_INET6 || !sa->sa.sin6.sin6_scope_id) {
+        return APR_EBADIP;
+    }        
+
+    if (name) {
+        char *buf = apr_palloc(p, IF_NAMESIZE);
+        if (if_indextoname(sa->sa.sin6.sin6_scope_id, buf) == NULL)
+            return errno;
+        *name = buf;
+    }
+
+    if (id) *id = sa->sa.sin6.sin6_scope_id;
+    
+    return APR_SUCCESS;
+#endif
 }

@@ -97,7 +97,10 @@ apr_status_t apr_get_oslevel(apr_oslevel_e *level)
                 }
             }
             else if (oslev.dwMajorVersion == 6) {
-                apr_os_level = APR_WIN_VISTA;
+                if (oslev.dwMinorVersion == 0)
+                    apr_os_level = APR_WIN_VISTA;
+                else
+                    apr_os_level = APR_WIN_7;
             }
             else {
                 apr_os_level = APR_WIN_XP;
@@ -161,9 +164,11 @@ apr_status_t apr_get_oslevel(apr_oslevel_e *level)
  */
 
 static const char* const lateDllName[DLL_defined] = {
-    "kernel32", "advapi32", "mswsock",  "ws2_32", "shell32", "ntdll.dll"  };
+    "kernel32", "advapi32", "mswsock",  "ws2_32", "shell32", "ntdll.dll",
+    "Iphplapi"  };
 static HMODULE lateDllHandle[DLL_defined] = {
-     NULL,       NULL,       NULL,       NULL,     NULL,       NULL       };
+     NULL,       NULL,       NULL,       NULL,     NULL,      NULL,
+     NULL       };
 
 FARPROC apr_load_dll_func(apr_dlltoken_e fnLib, char* fnName, int ordinal)
 {
