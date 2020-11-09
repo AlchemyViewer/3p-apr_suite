@@ -467,6 +467,9 @@ changequote([, ])dnl
 AC_MSG_CHECKING(size of $2)
 AC_CACHE_VAL(AC_CV_NAME,
 [AC_TRY_RUN([#include <stdio.h>
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
 $1
 #ifdef WIN32
 #define binmode "b"
@@ -531,6 +534,9 @@ AC_TRY_RUN([
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
 main()
 {
   char buf[1024];
