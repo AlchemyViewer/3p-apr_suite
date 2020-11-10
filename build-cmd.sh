@@ -154,9 +154,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             make install
 
             # conditionally run unit tests
-            if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
-                make check
-            fi
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
         popd
 
         mkdir -p "build_release"
@@ -167,9 +167,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             make install
 
             # conditionally run unit tests
-            if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
-                make check
-            fi
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
         popd
     popd
 
@@ -199,10 +199,10 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             make install
 
             # conditionally run unit tests
-            if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
-                export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
-                make check
-            fi
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
 
             rm $STAGING_DIR/packages/lib/*.dylib
         popd
@@ -218,10 +218,10 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             make install
 
             # conditionally run unit tests
-            if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
-                export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
-                make check
-            fi
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
 
             rm $STAGING_DIR/packages/lib/libexpat*.dylib
         popd
