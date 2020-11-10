@@ -190,11 +190,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
         mkdir -p "build_debug"
         pushd "build_debug"
-            cp -a $STAGING_DIR/packages/lib/release/*.dylib $STAGING_DIR/packages/lib
-
             CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
                 ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
-                --with-expat="$PREFIX/packages"
+                --with-expat="$SDKROOT/usr"
             make -j$JOBS
             make install
 
@@ -203,17 +201,13 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
             #     make check
             # fi
-
-            rm $STAGING_DIR/packages/lib/*.dylib
         popd
 
         mkdir -p "build_release"
         pushd "build_release"
-            cp -a $STAGING_DIR/packages/lib/release/*.dylib $STAGING_DIR/packages/lib
-
             CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
                 ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
-                --with-expat="$PREFIX/packages"
+                --with-expat="$SDKROOT/usr"
             make -j$JOBS
             make install
 
@@ -222,8 +216,6 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
             #     make check
             # fi
-
-            rm $STAGING_DIR/packages/lib/libexpat*.dylib
         popd
     popd
 

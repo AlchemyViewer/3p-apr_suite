@@ -17,20 +17,6 @@
         <string>expat</string>
         <key>platforms</key>
         <map>
-          <key>darwin64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>ccaf340abec7af393561da686d83e403437493731f0f8b55289bfe7c11346920b5074a54e5a5186aaa8d906b85a6ef9c</string>
-              <key>hash_algorithm</key>
-              <string>sha3_384</string>
-              <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-darwin64-658.tar.xz</string>
-            </map>
-            <key>name</key>
-            <string>darwin64</string>
-          </map>
           <key>linux64</key>
           <map>
             <key>archive</key>
