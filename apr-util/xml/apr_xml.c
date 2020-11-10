@@ -32,7 +32,7 @@
 #elif defined(HAVE_XML_XMLPARSE_H)
 #include <xml/xmlparse.h>
 #else
-#include <expat.h>
+#include <expat/expat.h>
 #endif
 
 #define DEBUG_CR "\r\n"
