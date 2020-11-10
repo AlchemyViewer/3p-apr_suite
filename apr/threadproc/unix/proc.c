@@ -813,11 +813,11 @@ static int max_fd()
 #if defined(F_MAXFD)
     do
     {
-        up = ::fcntl(0, F_MAXFD);
+        up = fcntl(0, F_MAXFD);
     } while (up == -1 && errno == EINTR);
     if (up == -1)
 #endif /* F_MAXFD */
-        up = ::sysconf(_SC_OPEN_MAX);
+        up = sysconf(_SC_OPEN_MAX);
     if (up == -1)
         up = 1000; /* completely arbitrary */
     return up;
