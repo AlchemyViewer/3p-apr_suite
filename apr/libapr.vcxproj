@@ -614,8 +614,8 @@
     <ClInclude Include="include\apr_env.h" />
     <ClInclude Include="include\apr_errno.h" />
     <CustomBuild Include="include\apr_escape.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(VC_ExecutablePath_x64_x86)\cl.exe" /nologo /W3 /EHsc /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\Debug\gen_test_char /Fe.\Debug\gen_test_char.exe .\tools\gen_test_char.c  
-.\Debug\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(VC_ExecutablePath_x64_x86)\cl.exe" /nologo /W3 /EHsc /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\Win32\Debug\gen_test_char /Fe.\Win32\Debug\gen_test_char.exe .\tools\gen_test_char.c  
+.\Win32\Debug\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating gen_test_char.exe and apr_escape_test_char.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\apr_escape_test_char.h;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(VC_ExecutablePath_x64_x64)\cl.exe" /nologo /W3 /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\x64\Release\gen_test_char /Fe.\x64\Release\gen_test_char.exe .\tools\gen_test_char.c 
@@ -626,8 +626,8 @@
 .\x64\Debug\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating gen_test_char.exe and apr_escape_test_char.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\apr_escape_test_char.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(VC_ExecutablePath_x64_x86)\cl.exe" /nologo /W3 /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\Release\gen_test_char /Fe.\Release\gen_test_char.exe .\tools\gen_test_char.c 
-.\Release\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(VC_ExecutablePath_x64_x86)\cl.exe" /nologo /W3 /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\Win32\Release\gen_test_char /Fe.\Win32\Release\gen_test_char.exe .\tools\gen_test_char.c 
+.\Win32\Release\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating gen_test_char.exe and apr_escape_test_char.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\apr_escape_test_char.h;%(Outputs)</Outputs>
     </CustomBuild>
