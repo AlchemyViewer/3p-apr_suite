@@ -43,7 +43,7 @@ APR_DECLARE(apr_uint64_t) apr_atomic_inc64(volatile apr_uint64_t *mem)
     return __sync_fetch_and_add(mem, 1);
 }
 
-APR_DECLARE(int) apr_atomic_dec64(volatile apr_uint64_t *mem)
+APR_DECLARE(apr_uint64_t) apr_atomic_dec64(volatile apr_uint64_t *mem)
 {
     return __sync_sub_and_fetch(mem, 1);
 }

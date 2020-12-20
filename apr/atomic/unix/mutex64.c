@@ -133,7 +133,7 @@ APR_DECLARE(apr_uint64_t) apr_atomic_inc64(volatile apr_uint64_t *mem)
     return apr_atomic_add64(mem, 1);
 }
 
-APR_DECLARE(int) apr_atomic_dec64(volatile apr_uint64_t *mem)
+APR_DECLARE(apr_uint64_t) apr_atomic_dec64(volatile apr_uint64_t *mem)
 {
     apr_uint64_t new;
     DECLARE_MUTEX_LOCKED(mutex, mem);
