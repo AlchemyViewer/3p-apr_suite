@@ -2,55 +2,55 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{90656446-a9d9-4719-8231-13f1ecf2075f}</UniqueIdentifier>
+      <UniqueIdentifier>{578c0aad-f07d-4245-a291-83ea1af38b0a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\buckets">
-      <UniqueIdentifier>{6c62a010-b008-4974-9b71-ce561c06891a}</UniqueIdentifier>
+      <UniqueIdentifier>{67837e16-d3b7-4c9b-9706-c736bbc69d68}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\crypto">
-      <UniqueIdentifier>{cfda5fdb-581d-496a-9e83-a43ea710b097}</UniqueIdentifier>
+      <UniqueIdentifier>{301ce793-3fe9-4768-aaa6-3e29e2e75706}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dbd">
-      <UniqueIdentifier>{2708f0ef-2be2-4200-95ec-e6b84bc993c9}</UniqueIdentifier>
+      <UniqueIdentifier>{e771987c-ef20-4a88-85b0-9a88faf768bc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dbm">
-      <UniqueIdentifier>{12a1d8e9-7238-4eca-a9d1-f41f2e614e17}</UniqueIdentifier>
+      <UniqueIdentifier>{3679e6f2-e874-4480-beff-420fa84b532c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\encoding">
-      <UniqueIdentifier>{4d1ff048-0acc-4b32-b3de-6e1dabd0eb9e}</UniqueIdentifier>
+      <UniqueIdentifier>{37e911e1-e6b7-40a3-9762-58703d40449b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\hooks">
-      <UniqueIdentifier>{e21868b3-f414-4ea1-a76e-f263d3ab80d4}</UniqueIdentifier>
+      <UniqueIdentifier>{a80e3af9-6b41-4647-9d4a-1f3816ff70f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\ldap">
-      <UniqueIdentifier>{e95f10ac-dc99-4edf-9137-505d827f374c}</UniqueIdentifier>
+      <UniqueIdentifier>{f7af6af4-e14a-40ef-9d4d-de9b14fd2eaf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\memcache">
-      <UniqueIdentifier>{f800d57e-731d-40c8-9564-61d18e642f13}</UniqueIdentifier>
+      <UniqueIdentifier>{709dfd7d-a48d-416b-98f5-2b0606eaa65e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\misc">
-      <UniqueIdentifier>{eae36aea-8941-42dd-9322-596ccb7ee993}</UniqueIdentifier>
+      <UniqueIdentifier>{2b9260cb-96da-4349-abf9-685a9703c26a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\sdbm">
-      <UniqueIdentifier>{d9886367-a47a-4d1b-b416-e15523d66a56}</UniqueIdentifier>
+      <UniqueIdentifier>{4695d688-7f08-459a-b080-9abb421ee983}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\strmatch">
-      <UniqueIdentifier>{f271e422-7e0c-48f9-a1a4-4523c4fabd9c}</UniqueIdentifier>
+      <UniqueIdentifier>{b1016d85-e144-4bd2-ba64-c9670c08d3d0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\uri">
-      <UniqueIdentifier>{88ebceb2-b29b-4eee-aa0d-d32306e8b4ba}</UniqueIdentifier>
+      <UniqueIdentifier>{a2694de3-2406-45ee-80a0-dd6f5d108085}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\xlate">
-      <UniqueIdentifier>{aaf1aa73-b77b-43f3-b2de-12cda7190165}</UniqueIdentifier>
+      <UniqueIdentifier>{83766eb6-bc03-4cf7-b12a-6ce30cb71fbf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\xml">
-      <UniqueIdentifier>{39628f93-eddc-4d9d-8585-03bf582fbe1e}</UniqueIdentifier>
+      <UniqueIdentifier>{1cbce450-0cad-486d-8a47-f631f5e270f6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Generated Files">
-      <UniqueIdentifier>{3c28880f-91b3-4e60-b066-21dbdff71afa}</UniqueIdentifier>
+      <UniqueIdentifier>{56b19644-b759-401e-801a-efe801a43127}</UniqueIdentifier>
     </Filter>
     <Filter Include="Public Header Files">
-      <UniqueIdentifier>{b03c7794-ae4a-4fd9-9679-481fb871b632}</UniqueIdentifier>
+      <UniqueIdentifier>{7650c9a0-fe40-4bbe-982a-88f36d2439da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,13 +93,25 @@
     <ClCompile Include="buckets\apr_buckets_socket.c">
       <Filter>Source Files\buckets</Filter>
     </ClCompile>
+    <ClCompile Include="crypto\apr_crypto.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
     <ClCompile Include="crypto\apr_md4.c">
       <Filter>Source Files\crypto</Filter>
     </ClCompile>
     <ClCompile Include="crypto\apr_md5.c">
       <Filter>Source Files\crypto</Filter>
     </ClCompile>
+    <ClCompile Include="crypto\apr_passwd.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
     <ClCompile Include="crypto\apr_sha1.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="crypto\apr_siphash.c">
+      <Filter>Source Files\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="crypto\crypt_blowfish.c">
       <Filter>Source Files\crypto</Filter>
     </ClCompile>
     <ClCompile Include="crypto\getuuid.c">
@@ -109,9 +121,6 @@
       <Filter>Source Files\crypto</Filter>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd.c">
-      <Filter>Source Files\dbd</Filter>
-    </ClCompile>
-    <ClCompile Include="dbd\apr_dbd_freetds.c">
       <Filter>Source Files\dbd</Filter>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_mysql.c">
@@ -215,6 +224,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crypto\crypt_blowfish.h">
+      <Filter>Source Files\crypto</Filter>
+    </ClInclude>
     <ClInclude Include="dbm\sdbm\sdbm_pair.h">
       <Filter>Source Files\sdbm</Filter>
     </ClInclude>
@@ -273,6 +285,9 @@
       <Filter>Public Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\apr_sha1.h">
+      <Filter>Public Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\apr_siphash.h">
       <Filter>Public Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\apr_strmatch.h">

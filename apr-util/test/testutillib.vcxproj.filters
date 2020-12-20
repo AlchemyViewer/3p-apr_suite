@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="testall Source Files">
+      <UniqueIdentifier>{4d054ee0-094c-4439-a2a4-d0fc785b6038}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+    <Filter Include="Other Source Files">
+      <UniqueIdentifier>{8c21fd7e-7f6a-4bff-b1ed-8ec4a5d2f5f0}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="abts.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testbuckets.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdate.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdbd.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdbm.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testldap.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testmd4.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testmd5.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testmemcache.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testpass.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testqueue.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testreslist.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testrmm.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teststrmatch.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testuri.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testutil.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testuuid.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testxlate.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testxml.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="abts.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="abts_tests.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Makefile.win" />
+  </ItemGroup>
+</Project>

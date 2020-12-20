@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug9x|Win32">
+      <Configuration>Debug9x</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug9x|x64">
+      <Configuration>Debug9x</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release9x|Win32">
+      <Configuration>Release9x</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release9x|x64">
+      <Configuration>Release9x</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>MakeFileProj</Keyword>
+    <ProjectGuid>{B76F0B1D-7C85-438A-8021-659182274C0A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug9x|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug9x|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release9x|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug9x|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=x64\LibD OUTDIR=x64\LibD MODEL=static _DEBUG=1 all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=x64\LibD OUTDIR=x64\LibD MODEL=static _DEBUG=1 all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>x64\LibD\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug9x|Win32'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=9x\LibD OUTDIR=9x\LibD MODEL=static _DEBUG=1 all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=9x\LibD OUTDIR=9x\LibD MODEL=static _DEBUG=1 all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>9x\LibD\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=LibD OUTDIR=LibD MODEL=static _DEBUG=1 all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=LibD OUTDIR=LibD MODEL=static _DEBUG=1 all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>LibD\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=x64\LibR OUTDIR=x64\LibR MODEL=static all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=x64\LibR OUTDIR=x64\LibR MODEL=static all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>x64\LibR\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=9x\LibR OUTDIR=9x\LibR MODEL=static all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=9x\LibR OUTDIR=9x\LibR MODEL=static all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>9x\LibR\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\</OutDir>
+    <IntDir>.\</IntDir>
+    <NMakeBuildCommandLine>NMAKE /f Makefile.win INTDIR=LibR OUTDIR=LibR MODEL=static all check</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>NMAKE /f Makefile.win INTDIR=LibR OUTDIR=LibR MODEL=static all check /a</NMakeReBuildCommandLine>
+    <NMakeOutput>LibR\testall.exe</NMakeOutput>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="abts.c" />
+    <ClCompile Include="dbd.c" />
+    <ClCompile Include="testbuckets.c" />
+    <ClCompile Include="testdate.c" />
+    <ClCompile Include="testdbd.c" />
+    <ClCompile Include="testdbm.c" />
+    <ClCompile Include="testldap.c" />
+    <ClCompile Include="testmd4.c" />
+    <ClCompile Include="testmd5.c" />
+    <ClCompile Include="testmemcache.c" />
+    <ClCompile Include="testpass.c" />
+    <ClCompile Include="testqueue.c" />
+    <ClCompile Include="testreslist.c" />
+    <ClCompile Include="testrmm.c" />
+    <ClCompile Include="teststrmatch.c" />
+    <ClCompile Include="testuri.c" />
+    <ClCompile Include="testutil.c" />
+    <ClCompile Include="testuuid.c" />
+    <ClCompile Include="testxlate.c" />
+    <ClCompile Include="testxml.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="abts.h" />
+    <ClInclude Include="abts_tests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Makefile.win" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\apr-iconv\apriconv.vcxproj">
+      <Project>{5e5f3941-8ca2-4bbc-bec4-b0c1b8800754}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\apr\apr.vcxproj">
+      <Project>{1906e626-511e-4f9d-b3e1-7d80bd486d2b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\apr\build\aprapp.vcxproj">
+      <Project>{ff3398b7-cc1e-41dd-b42a-150976bce630}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\aprutil.vcxproj">
+      <Project>{7c36bd79-3a51-4418-be46-9af7f73d0725}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

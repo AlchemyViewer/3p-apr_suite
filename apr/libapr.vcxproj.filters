@@ -2,73 +2,85 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{423c0074-4622-40fb-ae1e-5f3ef8b718b0}</UniqueIdentifier>
+      <UniqueIdentifier>{4de97b3d-ed69-4b3e-ac65-6ad4f489be8d}</UniqueIdentifier>
       <Extensions>.c</Extensions>
     </Filter>
     <Filter Include="Source Files\atomic">
-      <UniqueIdentifier>{6bbd8668-11a7-4a4b-9b13-8083aa1f0112}</UniqueIdentifier>
+      <UniqueIdentifier>{577c5550-59e2-452e-92cf-49c7a61890cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\dso">
-      <UniqueIdentifier>{5f004ca6-244f-40d9-a520-b7f0a7e5d948}</UniqueIdentifier>
+      <UniqueIdentifier>{f0f0d97f-ef55-48ee-a599-08fd87d78602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\encoding">
+      <UniqueIdentifier>{eca3a735-a150-4ea2-ba90-a3f6624a4e37}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\file_io">
-      <UniqueIdentifier>{59bde38f-f4c7-4f44-96f7-06fb0409f674}</UniqueIdentifier>
+      <UniqueIdentifier>{47997c8d-63b6-4332-940e-429f9a9aa700}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\locks">
-      <UniqueIdentifier>{17ffd64a-251c-44da-86fd-f627102e558a}</UniqueIdentifier>
+      <UniqueIdentifier>{bd52215b-5a09-46ad-b01b-4545969113fc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\memory">
-      <UniqueIdentifier>{13658dbf-7669-4192-a48c-3481f028707a}</UniqueIdentifier>
+      <UniqueIdentifier>{8dcd05a4-9ba5-4713-94af-2d49e5eddced}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\misc">
-      <UniqueIdentifier>{b4eef238-6ce6-4b20-bb1e-861256470d1f}</UniqueIdentifier>
+      <UniqueIdentifier>{76da830a-14b9-405a-b1b4-b1e435fa13e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\mmap">
-      <UniqueIdentifier>{374f9f2b-2e5e-4654-8afe-fc62dfdc4786}</UniqueIdentifier>
+      <UniqueIdentifier>{ea01a4ea-ed99-4782-9bcd-4459c4414860}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\network_io">
-      <UniqueIdentifier>{942fcd3e-c26e-4e86-aea5-a0f0ca94e9ff}</UniqueIdentifier>
+      <UniqueIdentifier>{326d8eb3-1357-40f4-a220-86bca4c7b768}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\passwd">
-      <UniqueIdentifier>{92b7081f-40e6-48f7-ba5f-947b90c0c4e3}</UniqueIdentifier>
+      <UniqueIdentifier>{0720a035-97ec-45f3-8a37-3194dfcb4299}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\poll">
-      <UniqueIdentifier>{f9c71faa-87b5-4ba9-942f-79892a53b8dc}</UniqueIdentifier>
+      <UniqueIdentifier>{5ba0f9c4-4c1a-4cd6-8801-683706f9f138}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\random">
-      <UniqueIdentifier>{cce2d83d-410d-4460-9124-2e214f9bdf38}</UniqueIdentifier>
+      <UniqueIdentifier>{d0e0e732-1b23-42cf-a393-6a0f134b21e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\shmem">
-      <UniqueIdentifier>{96bdc7e6-9e23-4544-a5f8-defc885867c7}</UniqueIdentifier>
+      <UniqueIdentifier>{200cbe2f-21d7-49fd-9a25-3f1154233ab0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\strings">
-      <UniqueIdentifier>{5307e445-bcdc-4d24-ab7a-f0f64c5463d7}</UniqueIdentifier>
+      <UniqueIdentifier>{1aa50fbd-8d48-49f1-8418-9f6d6ae1ad8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tables">
-      <UniqueIdentifier>{540edb5b-9f1e-478c-96e6-254a7fcc78b6}</UniqueIdentifier>
+      <UniqueIdentifier>{3648de50-3167-4a80-9d98-68bbc58232a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\threadproc">
-      <UniqueIdentifier>{f6d0c0eb-10a9-4a54-adfe-e9b5dc62ff84}</UniqueIdentifier>
+      <UniqueIdentifier>{60db7ae7-4bcd-4a92-a63e-b7fdc0c45d64}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\time">
-      <UniqueIdentifier>{42a4eaa2-7182-47bc-88aa-657aff265623}</UniqueIdentifier>
+      <UniqueIdentifier>{c072a16e-84e1-425c-9978-11a3f5a3887d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\user">
-      <UniqueIdentifier>{bc9fa0ae-2396-4087-bc5b-ff7bd94c9549}</UniqueIdentifier>
+      <UniqueIdentifier>{4a80d624-3efd-4c04-9ee2-b16e702da265}</UniqueIdentifier>
     </Filter>
     <Filter Include="Private Header Files">
-      <UniqueIdentifier>{16cc4336-cf65-4d1d-aa21-041dcb87c605}</UniqueIdentifier>
+      <UniqueIdentifier>{edb74b41-396f-4957-996c-b3fb04986024}</UniqueIdentifier>
     </Filter>
     <Filter Include="Public Header Files">
-      <UniqueIdentifier>{4c06fc05-9bfe-4ac6-9ae5-8f131e8ab076}</UniqueIdentifier>
+      <UniqueIdentifier>{b6cc87c4-4ca8-4dda-90ff-64f2f473b06c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="atomic\win32\apr_atomic.c">
       <Filter>Source Files\atomic</Filter>
     </ClCompile>
+    <ClCompile Include="atomic\win32\apr_atomic64.c">
+      <Filter>Source Files\atomic</Filter>
+    </ClCompile>
     <ClCompile Include="dso\win32\dso.c">
       <Filter>Source Files\dso</Filter>
+    </ClCompile>
+    <ClCompile Include="encoding\apr_encode.c">
+      <Filter>Source Files\encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="encoding\apr_escape.c">
+      <Filter>Source Files\encoding</Filter>
     </ClCompile>
     <ClCompile Include="file_io\win32\buffer.c">
       <Filter>Source Files\file_io</Filter>
@@ -154,6 +166,9 @@
     <ClCompile Include="misc\win32\internal.c">
       <Filter>Source Files\misc</Filter>
     </ClCompile>
+    <ClCompile Include="misc\win32\log.c">
+      <Filter>Source Files\misc</Filter>
+    </ClCompile>
     <ClCompile Include="misc\win32\misc.c">
       <Filter>Source Files\misc</Filter>
     </ClCompile>
@@ -217,6 +232,9 @@
     <ClCompile Include="poll\unix\select.c">
       <Filter>Source Files\poll</Filter>
     </ClCompile>
+    <ClCompile Include="poll\unix\wakeup.c">
+      <Filter>Source Files\poll</Filter>
+    </ClCompile>
     <ClCompile Include="random\unix\apr_random.c">
       <Filter>Source Files\random</Filter>
     </ClCompile>
@@ -230,6 +248,9 @@
       <Filter>Source Files\shmem</Filter>
     </ClCompile>
     <ClCompile Include="strings\apr_cpystrn.c">
+      <Filter>Source Files\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="strings\apr_cstr.c">
       <Filter>Source Files\strings</Filter>
     </ClCompile>
     <ClCompile Include="strings\apr_fnmatch.c">
@@ -253,6 +274,9 @@
     <ClCompile Include="tables\apr_tables.c">
       <Filter>Source Files\tables</Filter>
     </ClCompile>
+    <ClCompile Include="tables\apr_skiplist.c">
+      <Filter>Source Files\tables</Filter>
+    </ClCompile>
     <ClCompile Include="threadproc\win32\proc.c">
       <Filter>Source Files\threadproc</Filter>
     </ClCompile>
@@ -265,8 +289,6 @@
     <ClCompile Include="threadproc\win32\threadpriv.c">
       <Filter>Source Files\threadproc</Filter>
     </ClCompile>
-    <!--
--->
     <ClCompile Include="time\win32\time.c">
       <Filter>Source Files\time</Filter>
     </ClCompile>
@@ -279,7 +301,6 @@
     <ClCompile Include="user\win32\userinfo.c">
       <Filter>Source Files\user</Filter>
     </ClCompile>
-    <ClCompile Include="misc\win32\log.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\arch\win32\apr_arch_atime.h">
@@ -310,6 +331,9 @@
       <Filter>Private Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\arch\win32\apr_arch_utf8.h">
+      <Filter>Private Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\arch\win32\apr_log.h">
       <Filter>Private Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\arch\win32\apr_private.h">
@@ -390,6 +414,9 @@
     <ClInclude Include="include\apr_signal.h">
       <Filter>Public Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\apr_skiplist.h">
+      <Filter>Public Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\apr_strings.h">
       <Filter>Public Header Files</Filter>
     </ClInclude>
@@ -435,6 +462,9 @@
       <Filter>Public Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\apr.hw">
+      <Filter>Public Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\apr_escape.h">
       <Filter>Public Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

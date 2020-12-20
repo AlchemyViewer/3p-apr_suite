@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="testall Source Files">
+      <UniqueIdentifier>{37e2d3a8-3eb2-47a6-8957-c1a8aedb24df}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+    <Filter Include="Other Source Files">
+      <UniqueIdentifier>{dd4552cd-f640-448b-97f5-4c72466f061b}</UniqueIdentifier>
+      <Extensions>.c</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="abts.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testapp.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testargs.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testatomic.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testcond.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdir.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdso.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testdup.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testenv.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testfile.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testfilecopy.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testfileinfo.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testflock.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testfmt.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testfnmatch.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testglobalmutex.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testhash.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testipsub.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testlfs.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testlock.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testmmap.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testnames.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testoc.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testpath.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testpipe.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testpoll.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testpools.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testproc.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testrand.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testshm.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testsleep.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testsock.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testsockets.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testsockopt.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teststr.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teststrnatcmp.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testtable.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testtemp.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testthread.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testtime.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testud.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testuser.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testutil.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testvsn.c">
+      <Filter>testall Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globalmutexchild.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_test.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nw_misc.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="occhild.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="proc_child.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readchild.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sendfile.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sockchild.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testlockperf.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testmutexscope.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testprocmutex.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testshmconsumer.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testshmproducer.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tryread.c">
+      <Filter>Other Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="abts.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="abts_tests.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testflock.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testglobalmutex.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testshm.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testsock.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testutil.h">
+      <Filter>testall Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Makefile.win" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -29,7 +29,7 @@
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
-    <ProjectGuid>{D4A966E1-0709-CC62-E24F-5C020BC0B41D}</ProjectGuid>
+    <ProjectGuid>{E4E61E75-51AB-4251-800C-4624869A47F9}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -39,19 +39,21 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
     <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
     <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -129,8 +131,8 @@
       <Optimization>Disabled</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;./xml/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;../stage/packages/include/expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions> /EHsc </AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
@@ -160,8 +162,7 @@
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../stage/packages/lib/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,8 +173,8 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;./xml/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;../stage/packages/include/expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -206,6 +207,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <IgnoreSpecificDefaultLibraries>libcmt</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>../stage/packages/lib/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -218,8 +220,8 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;./xml/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;../stage/packages/include/expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -251,6 +253,7 @@
       <AdditionalOptions> /MACHINE:X64</AdditionalOptions>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>../stage/packages/lib/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -263,8 +266,8 @@
       <Optimization>Disabled</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;./xml/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;../stage/packages/include/expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions> /EHsc </AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
@@ -294,271 +297,399 @@
       <AdditionalDependencies>libapr-1.lib;libapriconv-1.lib;libexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions> /MACHINE:X86</AdditionalOptions>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>../stage/packages/lib/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="buckets\apr_brigade.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_alloc.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_eos.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_file.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_flush.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_heap.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_mmap.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_pipe.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_pool.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_refcount.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_simple.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="buckets\apr_buckets_socket.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="crypto\apr_crypto.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="crypto\apr_md4.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="crypto\apr_md5.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="crypto\apr_passwd.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="crypto\apr_sha1.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="crypto\apr_siphash.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="crypto\crypt_blowfish.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="crypto\getuuid.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="crypto\uuid.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="dbd\apr_dbd_freetds.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_mysql.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_odbc.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_oracle.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_pgsql.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_sqlite2.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbd\apr_dbd_sqlite3.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbm\apr_dbm.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbm\apr_dbm_berkeleydb.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbm\apr_dbm_gdbm.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="dbm\apr_dbm_sdbm.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="dbm\sdbm\sdbm.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="dbm\sdbm\sdbm_hash.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="dbm\sdbm\sdbm_lock.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="dbm\sdbm\sdbm_pair.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="encoding\apr_base64.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="hooks\apr_hooks.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="ldap\apr_ldap_init.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="ldap\apr_ldap_option.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="ldap\apr_ldap_rebind.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="ldap\apr_ldap_stub.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="ldap\apr_ldap_url.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="memcache\apr_memcache.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apr_date.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="misc\apu_dso.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apr_queue.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apr_reslist.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apr_rmm.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apr_thread_pool.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="misc\apu_dso.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="misc\apu_version.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
-    <ClCompile Include="dbm\sdbm\sdbm.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="dbm\sdbm\sdbm_hash.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="dbm\sdbm\sdbm_lock.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="dbm\sdbm\sdbm_pair.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+    <ClCompile Include="redis\apr_redis.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="strmatch\apr_strmatch.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="uri\apr_uri.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="xlate\xlate.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="xml\apr_xml.c">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc   /EHsc </AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc   /EHsc </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> $(XML_OPTIONS)  $(XML_OPTIONS)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /EHsc $(XML_OPTIONS)  /EHsc $(XML_OPTIONS)</AdditionalOptions>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crypto\crypt_blowfish.h" />
     <ClInclude Include="dbm\sdbm\sdbm_pair.h" />
     <ClInclude Include="dbm\sdbm\sdbm_private.h" />
     <ClInclude Include="dbm\sdbm\sdbm_tune.h" />
@@ -579,6 +710,7 @@
     <ClInclude Include="include\apr_rmm.h" />
     <ClInclude Include="include\apr_sdbm.h" />
     <ClInclude Include="include\apr_sha1.h" />
+    <ClInclude Include="include\apr_siphash.h" />
     <ClInclude Include="include\apr_strmatch.h" />
     <ClInclude Include="include\apr_thread_pool.h" />
     <ClInclude Include="include\apr_uri.h" />
@@ -588,14 +720,9 @@
     <ClInclude Include="include\apu_version.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="include\apr_ldap.h.in">
-      <FileType>Document</FileType>
-    </CustomBuild>
-    <CustomBuild Include="include\apr_ldap.hnw">
-      <FileType>Document</FileType>
-    </CustomBuild>
+    <CustomBuild Include="include\apr_ldap.h.in" />
+    <CustomBuild Include="include\apr_ldap.hnw" />
     <CustomBuild Include="include\apr_ldap.hw">
-      <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\apr_ldap.hw &gt; .\include\apr_ldap.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apr_ldap.h from apr_ldap.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\apr_ldap.h;%(Outputs)</Outputs>
@@ -609,14 +736,9 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apr_ldap.h from apr_ldap.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\apr_ldap.h;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="include\apu.h.in">
-      <FileType>Document</FileType>
-    </CustomBuild>
-    <CustomBuild Include="include\apu.hnw">
-      <FileType>Document</FileType>
-    </CustomBuild>
+    <CustomBuild Include="include\apu.h.in" />
+    <CustomBuild Include="include\apu.hnw" />
     <CustomBuild Include="include\apu.hw">
-      <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\apu.hw &gt; .\include\apu.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu.h from apu.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\apu.h;%(Outputs)</Outputs>
@@ -630,50 +752,9 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu.h from apu.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\apu.h;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Include="include\private\apu_config.h.in">
-      <FileType>Document</FileType>
-    </CustomBuild>
-    <CustomBuild Include="include\private\apu_config.hw">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu_config.h from apu_config.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\private\apu_config.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating apu_config.h from apu_config.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\private\apu_config.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating apu_config.h from apu_config.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\include\private\apu_config.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu_config.h from apu_config.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\private\apu_config.h;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="include\private\apu_select_dbm.h.in">
-      <FileType>Document</FileType>
-    </CustomBuild>
-    <CustomBuild Include="include\private\apu_select_dbm.hw">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="include\apu_want.h.in">
-      <FileType>Document</FileType>
-    </CustomBuild>
-    <CustomBuild Include="include\apu_want.hnw">
-      <FileType>Document</FileType>
-    </CustomBuild>
+    <CustomBuild Include="include\apu_want.h.in" />
+    <CustomBuild Include="include\apu_want.hnw" />
     <CustomBuild Include="include\apu_want.hw">
-      <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\apu_want.hw &gt; .\include\apu_want.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu_want.h from apu_want.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\apu_want.h;%(Outputs)</Outputs>
@@ -687,9 +768,61 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu_want.h from apu_want.hw</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\apu_want.h;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="include\private\apu_config.h.in" />
+    <CustomBuild Include="include\private\apu_config.hw">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu_config.h from apu_config.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\private\apu_config.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating apu_config.h from apu_config.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\private\apu_config.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating apu_config.h from apu_config.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\include\private\apu_config.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">type .\include\private\apu_config.hw &gt; .\include\private\apu_config.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu_config.h from apu_config.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\private\apu_config.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="include\private\apu_select_dbm.h.in" />
+    <CustomBuild Include="include\private\apu_select_dbm.hw">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">type .\include\private\apu_select_dbm.hw &gt; .\include\private\apu_select_dbm.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Creating apu_select_dbm.h from apu_select_dbm.hw</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\include\private\apu_select_dbm.h;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="libaprutil.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\apr-iconv\ccs\libapriconv_ccs_modules.vcxproj">
+      <Project>{a6e8f620-6a5d-4041-953f-b74625123dcd}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\apr-iconv\ces\libapriconv_ces_modules.vcxproj">
+      <Project>{3240ee41-32dc-4cc7-85bc-dfad74a4513a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\apr-iconv\libapriconv.vcxproj">
+      <Project>{d4cb95f5-298e-42f7-94ba-04e724c6fdfe}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\apr\build\libaprapp.vcxproj">
+      <Project>{438149eb-45b5-4896-b940-3498285bcf47}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\apr\libapr.vcxproj">
+      <Project>{27477e17-a9e3-48eb-b4ad-6af14f4b9427}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
