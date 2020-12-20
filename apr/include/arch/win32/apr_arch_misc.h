@@ -47,7 +47,7 @@
 #include <tlhelp32.h>
 #endif
 
-#if defined(HAVE_IF_INDEXTONAME) && defined(_MSC_VER)
+#if (defined(HAVE_IF_INDEXTONAME) || defined(HAVE_IF_INDEXTONAME))  && defined(_MSC_VER)
 #include <Iphlpapi.h>
 #endif
 
