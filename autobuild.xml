@@ -34,9 +34,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>3656b7f7b655cb267fd94f089d2e145c</string>
+              <string>ccaf340abec7af393561da686d83e403437493731f0f8b55289bfe7c11346920b5074a54e5a5186aaa8d906b85a6ef9c</string>
+              <key>hash_algorithm</key>
+              <string>sha3_384</string>
               <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/ct2/54860/510198/expat-2.1.1.538990-darwin64-538990.tar.bz2</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-darwin64-658.tar.xz</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
@@ -58,9 +60,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>5e1f025d1cebd12db542080aa755257f</string>
+              <string>29fa7170d908e84c6b456064ad51f1f9feba11effd12d7c0f9600597fb51085ec4d72eee8473420167568018b3c53282</string>
+              <key>hash_algorithm</key>
+              <string>sha3_384</string>
               <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/ct2/380/943/expat-2.1.1.500375-linux64-500375.tar.bz2</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-linux64-658.tar.xz</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -70,11 +74,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>4f6ce988932eb420afdb4eacd75dbce8</string>
+              <string>af1d89aa93916ee8ef9382f057b47abf31ebc6e44f1f9ecd8bc16193ef40a98669a821c2c0dd3c9368c14630a5144119</string>
               <key>hash_algorithm</key>
-              <string>md5</string>
+              <string>sha3_384</string>
               <key>url</key>
-              <string>https://pkg.alchemyviewer.org/repository/autobuild-external/expat/windows/expat-2.2.9.323-windows-323.tar.bz2</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-windows-658.tar.xz</string>
             </map>
             <key>name</key>
             <string>windows</string>
@@ -84,18 +88,18 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>49dc81485705a32d345b4af6dab4ac1c</string>
+              <string>b8f16fdb8a3034a0c9ea616bb2ab4950ba88b2e597e92d4d346305ac6fbf4b9b8ff2b44db9696cd499641b80cf6cce28</string>
               <key>hash_algorithm</key>
-              <string>md5</string>
+              <string>sha3_384</string>
               <key>url</key>
-              <string>https://pkg.alchemyviewer.org/repository/autobuild-external/expat/windows64/expat-2.2.9.323-windows64-323.tar.bz2</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-windows64-658.tar.xz</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>2.2.9.323</string>
+        <string>2.2.10</string>
       </map>
     </map>
     <key>package_description</key>
