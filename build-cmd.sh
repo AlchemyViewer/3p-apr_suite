@@ -206,75 +206,148 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
   ;;
 
   linux*)
+    # Default target per --address-size
+    opts="${TARGET_OPTS:--m$AUTOBUILD_ADDRSIZE}"
+
+    # Setup build flags
+    DEBUG_COMMON_FLAGS="$opts -Og -g -fPIC -DPIC"
+    RELEASE_COMMON_FLAGS="$opts -O3 -g -fPIC -DPIC -fstack-protector-strong -D_FORTIFY_SOURCE=2"
+    DEBUG_CFLAGS="$DEBUG_COMMON_FLAGS"
+    RELEASE_CFLAGS="$RELEASE_COMMON_FLAGS"
+    DEBUG_CXXFLAGS="$DEBUG_COMMON_FLAGS -std=c++17"
+    RELEASE_CXXFLAGS="$RELEASE_COMMON_FLAGS -std=c++17"
+    DEBUG_CPPFLAGS="-DPIC"
+    RELEASE_CPPFLAGS="-DPIC"
+    DEBUG_LDFLAGS="$opts"
+    RELEASE_LDFLAGS="$opts"      
+
+    JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
+
+    # Handle any deliberate platform targeting
+    if [ -z "${TARGET_CPPFLAGS:-}" ]; then
+        # Remove sysroot contamination from build environment
+        unset CPPFLAGS
+    else
+        # Incorporate special pre-processing flags
+        export CPPFLAGS="$TARGET_CPPFLAGS"
+    fi
+
+    # Fix up path for pkgconfig
+    if [ -d "$STAGING_DIR/packages/lib/release/pkgconfig" ]; then
+        fix_pkgconfig_prefix "$STAGING_DIR/packages"
+    fi
+
+    OLD_PKG_CONFIG_PATH="${PKG_CONFIG_PATH:-}"
+
     PREFIX="$STAGING_DIR"
+    PREFIX_DEBUG="$PREFIX/temp_debug"
+    PREFIX_RELEASE="$PREFIX/temp_release"
 
-    opts="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE"
+    mkdir -p $PREFIX_DEBUG
+    mkdir -p $PREFIX_RELEASE
 
-    # do release builds
     pushd "$TOP_DIR/apr"
-        LDFLAGS="$opts" CFLAGS="$opts" CXXFLAGS="$opts" \
-            ./configure --prefix="$PREFIX" --libdir="$PREFIX/lib/release"
-        make
-        make install
-    popd
+        autoreconf -fvi
 
-    pushd "$TOP_DIR/apr-iconv"
-        # NOTE: the autotools scripts in iconv don't honor the --libdir switch so we
-        # need to build to a dummy prefix and copy the files into the correct place
-        mkdir "$PREFIX/iconv"
-        LDFLAGS="$opts" CFLAGS="$opts" CXXFLAGS="$opts" \
-            ./configure --prefix="$PREFIX/iconv" --with-apr="../apr"
-        make
-        make install
+        mkdir -p "build_debug"
+        pushd "build_debug"
+            # debug configure and build
+            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/debug/pkgconfig:${OLD_PKG_CONFIG_PATH}"
 
-        # move the files into place
-        mkdir -p "$PREFIX/bin"
-        cp -a "$PREFIX"/iconv/lib/* "$PREFIX/lib/release"
-        cp -r "$PREFIX/iconv/include/apr-1" "$PREFIX/include/"
-        cp "$PREFIX/iconv/bin/apriconv" "$PREFIX/bin/"
-        rm -rf "$PREFIX/iconv"
+            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
+                ../configure --enable-debug --prefix="$PREFIX_DEBUG"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd
+
+        mkdir -p "build_release"
+        pushd "build_release"
+            # debug configure and build
+            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/release/pkgconfig:${OLD_PKG_CONFIG_PATH}"
+
+            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd
     popd
 
     pushd "$TOP_DIR/apr-util"
-        # the autotools can't find the expat static lib with the layout of our
-        # libraries so we need to copy the file to the correct location temporarily
-        cp "$PREFIX/packages/lib/release/libexpat.a" "$PREFIX/packages/lib/"
+        autoreconf -fvi
 
-        # the autotools for apr-util don't honor the --libdir switch so we
-        # need to build to a dummy prefix and copy the files into the correct place
-        mkdir "$PREFIX/util"
-        LDFLAGS="$opts" CFLAGS="$opts" CXXFLAGS="$opts" \
-            ./configure --prefix="$PREFIX/util" \
-            --with-apr="../apr" \
-            --with-apr-iconv="../apr-iconv" \
-            --with-expat="$PREFIX/packages/"
-        make
-        make install
+        mkdir -p "build_debug"
+        pushd "build_debug"
+            # debug configure and build
+            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/debug/pkgconfig:${OLD_PKG_CONFIG_PATH}"
 
-        # move files into place
-        mkdir -p "$PREFIX/bin"
-        cp -a "$PREFIX"/util/lib/* "$PREFIX/lib/release/"
-        cp -r "$PREFIX/util/include/apr-1" "$PREFIX/include/"
-        cp "$PREFIX"/util/bin/* "$PREFIX/bin/"
-        rm -rf "$PREFIX/util"
-        rm -rf "$PREFIX/packages/lib/libexpat.a"
+            cp -a $STAGING_DIR/packages/lib/release/*.so* $STAGING_DIR/packages/lib
+
+            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
+                ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
+                --with-expat="$PREFIX/packages"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export LD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+
+            rm $STAGING_DIR/packages/lib/*.so*
+        popd
+
+        mkdir -p "build_release"
+        pushd "build_release"
+            # debug configure and build
+            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/release/pkgconfig:${OLD_PKG_CONFIG_PATH}"
+
+            cp -a $STAGING_DIR/packages/lib/release/*.so* $STAGING_DIR/packages/lib
+
+            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
+                --with-expat="$PREFIX/packages"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export LD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+
+            rm $STAGING_DIR/packages/lib/*.so*
+        popd
     popd
 
-    # APR includes its own expat.h header that doesn't have all of the features
-    # in the expat library that we have a dependency
-    cp "$PREFIX/packages/include/expat/expat_external.h" "$PREFIX/include/apr-1/"
-    cp "$PREFIX/packages/include/expat/expat.h" "$PREFIX/include/apr-1/"
+    mkdir -p "$PREFIX/include"
+    mkdir -p "$PREFIX/lib/debug"
+    mkdir -p "$PREFIX/lib/release"
 
-    # clean
-    pushd "$TOP_DIR/apr"
-        make distclean
+    cp -a $PREFIX_DEBUG/lib/*.so* $PREFIX/lib/debug
+    cp -a $PREFIX_RELEASE/lib/*.so* $PREFIX/lib/release
+
+    pushd "$PREFIX/lib/debug"
+        chrpath -d libapr-1.so
+        chrpath -d libaprutil-1.so
     popd
-    pushd "$TOP_DIR/apr-iconv"
-        make distclean
+
+    pushd "$PREFIX/lib/release"
+        chrpath -d libapr-1.so
+        chrpath -d libaprutil-1.so
     popd
-    pushd "$TOP_DIR/apr-util"
-        make distclean
-    popd
+
+    cp -a $PREFIX_RELEASE/include/* $PREFIX/include/
   ;;
 esac
 

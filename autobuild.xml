@@ -17,18 +17,6 @@
         <string>expat</string>
         <key>platforms</key>
         <map>
-          <key>darwin</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>452d1910ef853329cd59858e6c5b2c48</string>
-              <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/hg/repo/expat_3p-update-expat/rev/297014/arch/Darwin/installer/expat-2.0.1.297014-darwin-297014.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>darwin</string>
-          </map>
           <key>darwin64</key>
           <map>
             <key>archive</key>
@@ -42,18 +30,6 @@
             </map>
             <key>name</key>
             <string>darwin64</string>
-          </map>
-          <key>linux</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>387c90b9bb5ec412587fbe7a56261dd1</string>
-              <key>url</key>
-              <string>http://automated-builds-secondlife-com.s3.amazonaws.com/hg/repo/p64_3p-expat/rev/314211/arch/Linux/installer/expat-2.1.1.314211-linux-314211.tar.bz2</string>
-            </map>
-            <key>name</key>
-            <string>linux</string>
           </map>
           <key>linux64</key>
           <map>
@@ -186,9 +162,8 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/release/*.so</string>
-            <string>lib/release/*.so.*</string>
-            <string>lib/release/*.a</string>
+            <string>lib/debug/*.so*</string>
+            <string>lib/release/*.so*</string>
           </array>
           <key>name</key>
           <string>linux</string>
