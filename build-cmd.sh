@@ -115,94 +115,130 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
   ;;
 
   darwin*)
-    PREFIX="$STAGING_DIR"
+    # Setup osx sdk platform
+    SDKNAME="macosx"
+    export SDKROOT=$(xcodebuild -version -sdk ${SDKNAME} Path)
+    export MACOSX_DEPLOYMENT_TARGET=10.13
 
-    opts="-arch $AUTOBUILD_CONFIGURE_ARCH $LL_BUILD_RELEASE"
+    # Setup build flags
+    ARCH_FLAGS="-arch x86_64"
+    SDK_FLAGS="-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} -isysroot ${SDKROOT}"
+    DEBUG_COMMON_FLAGS="$ARCH_FLAGS $SDK_FLAGS -O0 -g -msse4.2 -fPIC -DPIC"
+    RELEASE_COMMON_FLAGS="$ARCH_FLAGS $SDK_FLAGS -O3 -g -msse4.2 -fPIC -DPIC -fstack-protector-strong"
+    DEBUG_CFLAGS="$DEBUG_COMMON_FLAGS"
+    RELEASE_CFLAGS="$RELEASE_COMMON_FLAGS"
+    DEBUG_CXXFLAGS="$DEBUG_COMMON_FLAGS -std=c++17"
+    RELEASE_CXXFLAGS="$RELEASE_COMMON_FLAGS -std=c++17"
+    DEBUG_CPPFLAGS="-DPIC"
+    RELEASE_CPPFLAGS="-DPIC"
+    DEBUG_LDFLAGS="$ARCH_FLAGS $SDK_FLAGS -Wl,-headerpad_max_install_names"
+    RELEASE_LDFLAGS="$ARCH_FLAGS $SDK_FLAGS -Wl,-headerpad_max_install_names"
+
+    JOBS=`sysctl -n hw.ncpu`
+
+    PREFIX="$STAGING_DIR"
+    PREFIX_DEBUG="$PREFIX/temp_debug"
+    PREFIX_RELEASE="$PREFIX/temp_release"
+
+    mkdir -p $PREFIX_DEBUG
+    mkdir -p $PREFIX_RELEASE
 
     pushd "$TOP_DIR/apr"
-    CC="clang" CFLAGS="$opts" CXXFLAGS="$opts" LDFLAGS="$opts" \
-        ./configure --prefix="$PREFIX"
-    make
-    make install
+        autoreconf -fvi
+
+        mkdir -p "build_debug"
+        pushd "build_debug"
+            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
+                ../configure --enable-debug --prefix="$PREFIX_DEBUG"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd
+
+        mkdir -p "build_release"
+        pushd "build_release"
+            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd
+    popd
+
+    pushd "$PREFIX_DEBUG/lib"
+        fix_dylib_id "libapr-1.dylib"
+        dsymutil libapr-*.*.dylib
+        strip -x -S libapr-*.*.dylib
+    popd
+
+    pushd "$PREFIX_RELEASE/lib"
+        fix_dylib_id "libapr-1.dylib"
+        dsymutil libapr-*.*.dylib
+        strip -x -S libapr-*.*.dylib
     popd
 
     pushd "$TOP_DIR/apr-util"
-    CC="clang" CFLAGS="$opts" CXXFLAGS="$opts" LDFLAGS="$opts" \
-        ./configure --prefix="$PREFIX" --with-apr="$PREFIX" \
-        --with-expat="$PREFIX"
-    make
-    make install
+        autoreconf -fvi
+
+        mkdir -p "build_debug"
+        pushd "build_debug"
+            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
+                ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
+                --with-expat="$SDKROOT/usr"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+        popd
+
+        mkdir -p "build_release"
+        pushd "build_release"
+            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
+                --with-expat="$SDKROOT/usr"
+            make -j$JOBS
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+        popd
     popd
 
-    # To conform with autobuild install-package conventions, we want to move
-    # the libraries presently in "$PREFIX/lib" to "$PREFIX/lib/release".
-    # We want something like:
+    pushd "$PREFIX_DEBUG/lib"
+        fix_dylib_id "libaprutil-1.dylib"
+        dsymutil libaprutil-*.*.dylib
+        strip -x -S libaprutil-*.*.dylib
+    popd
 
-    # libapr-1.a
-    # libaprutil-1.a
-    # libapr-1.0.dylib
-    # libapr-1.dylib --> libapr-1.0.dylib
-    # libaprutil-1.0.dylib
-    # libaprutil-1.dylib --> libaprutil-1.0.dylib
+    pushd "$PREFIX_RELEASE/lib"
+        fix_dylib_id "libaprutil-1.dylib"
+        dsymutil libaprutil-*.*.dylib
+        strip -x -S libaprutil-*.*.dylib
+    popd
 
-    # But as of 2012-02-08, we observe that the real libraries are
-    # libapr-1.0.4.5.dylib and libaprutil-1.0.4.1.dylib, with
-    # libapr[util]-1.0.dylib (as well as libapr[util]-1.dylib) symlinked to
-    # them. That's no good: our Copy3rdPartyLibs.cmake and viewer_manifest.py
-    # scripts don't deal with the libapr[util]-1.0.major.minor.dylib files
-    # directly, they want to manipulate only libapr[util]-1.0.dylib. Fix
-    # things while relocating.
+    mkdir -p "$PREFIX/include"
+    mkdir -p "$PREFIX/lib/debug"
+    mkdir -p "$PREFIX/lib/release"
 
-    mkdir -p "$PREFIX/lib/release" || echo "reusing $PREFIX/lib/release"
-    for libname in libapr libaprutil
-    do # First just move the static library, that part is easy
-       mv "$PREFIX/lib/$libname-1.a" "$PREFIX/lib/release/"
-       # Ensure that lib/release/$libname-1.0.dylib is a real file, not a symlink
-       cp "$PREFIX/lib/$libname-1.0.dylib" "$PREFIX/lib/release"
-       # Make sure it's stamped with the -id we need in our app bundle.
-       # As of 2012-02-07, with APR 1.4.5, this function has been observed to
-       # fail on TeamCity builds. Does the failure matter? Hopefully not...
-       pushd "$PREFIX/lib/release"
-       fix_dylib_id "$libname-1.0.dylib" || \
-       echo "fix_dylib_id $libname-1.0.dylib failed, proceeding"
-       popd
-       # Recreate the $libname-1.dylib symlink, because the one in lib/ is
-       # pointing to (e.g.) libapr-1.0.4.5.dylib -- no good
-       ln -svf "$libname-1.0.dylib" "$PREFIX/lib/release/$libname-1.dylib"
-       # Clean up whatever's left in $PREFIX/lib for this $libname (e.g.
-       # libapr-1.0.4.5.dylib)
-       rm "$PREFIX/lib/$libname-"*.dylib || echo "moved all $libname-*.dylib"
-    done
+    cp -a $PREFIX_DEBUG/lib/*.dylib* $PREFIX/lib/debug
+    cp -a $PREFIX_RELEASE/lib/*.dylib* $PREFIX/lib/release
 
-    # When we linked apr-util against apr (above), it grabbed the -id baked
-    # into libapr-1.0.dylib as of that moment. A libaprutil-1.0.dylib built
-    # that way fails to load because it looks for
-    # "$PREFIX/lib/libapr-1.0.dylib" even on the user's machine. We tried
-    # horsing around with install_name_tool -id between building apr and
-    # building apr-util, but that didn't work too well. Fix it after the fact
-    # with install_name_tool -change.
-
-    # <deep breath>
-
-    # List library dependencies with otool -L. Skip the first two lines (tail
-    # -n +3): the first is otool reporting which library file it's reading,
-    # the second is that library's own -id stamp. Find embedded references to
-    # our own build area (Bad). From each such line, isolate just the
-    # pathname. (Theoretically we could use just awk instead of grep | awk,
-    # but getting awk to deal with the forward-slashes embedded in the
-    # pathname would be a royal pain. Simpler to use grep.) Now emit a -change
-    # switch for each of those pathnames: extract the basename and change it
-    # to the canonical relative Resources path. NOW: feed all those -change
-    # switches into an install_name_tool command operating on that same
-    # .dylib.
-    lib="$PREFIX/lib/release/libaprutil-1.0.dylib"
-    install_name_tool \
-        $(otool -L "$lib" | tail -n +3 | \
-          grep "$PREFIX/lib" | awk '{ print $1 }' | \
-          (while read f; \
-           do echo -change "$f" "@executable_path/../Resources/$(basename "$f")"; \
-           done) ) \
-        "$lib"
+    cp -a $PREFIX_RELEASE/include/* $PREFIX/include/
   ;;
 
   linux*)
