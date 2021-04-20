@@ -10,7 +10,6 @@ AC_INIT(build/apr_common.m4)
 AC_CONFIG_HEADER(include/arch/unix/apr_private.h)
 AC_CONFIG_MACRO_DIR(build)
 AC_CONFIG_AUX_DIR(build)
-AC_CONFIG_MACRO_DIR(build)
 
 dnl 
 dnl Include our own M4 macros along with those for libtool
