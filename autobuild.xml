@@ -22,46 +22,32 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>29fa7170d908e84c6b456064ad51f1f9feba11effd12d7c0f9600597fb51085ec4d72eee8473420167568018b3c53282</string>
+              <string>bddd7251394a79eadcbe21201d1e0154436d6304b8f6eacd2a1ee15a74ca0d0fb79132774a5db8f5cd0ce875a76afc491bde7da0d191d10787e333c75eb962bb</string>
               <key>hash_algorithm</key>
-              <string>sha3_384</string>
+              <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-linux64-658.tar.xz</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.1.1187/expat-2.4.1-linux64-1187.tar.zst</string>
             </map>
             <key>name</key>
             <string>linux64</string>
-          </map>
-          <key>windows</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>af1d89aa93916ee8ef9382f057b47abf31ebc6e44f1f9ecd8bc16193ef40a98669a821c2c0dd3c9368c14630a5144119</string>
-              <key>hash_algorithm</key>
-              <string>sha3_384</string>
-              <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-windows-658.tar.xz</string>
-            </map>
-            <key>name</key>
-            <string>windows</string>
           </map>
           <key>windows64</key>
           <map>
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>b8f16fdb8a3034a0c9ea616bb2ab4950ba88b2e597e92d4d346305ac6fbf4b9b8ff2b44db9696cd499641b80cf6cce28</string>
+              <string>87ccd4865b39973d63708431f0cb7523736f1736c896920227bc1616dbd49158bf3ba2c3ea5414754cf6794d9d82f082b040a743f5ba5709ddf31ccf88bde564</string>
               <key>hash_algorithm</key>
-              <string>sha3_384</string>
+              <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat-658/2.2.10/expat-2.2.10-windows64-658.tar.xz</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.1.1187/expat-2.4.1-windows64-1187.tar.zst</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>2.2.10</string>
+        <string>2.4.1</string>
       </map>
     </map>
     <key>package_description</key>
