@@ -330,7 +330,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
             CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
                 ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
-                --with-expat="$PREFIX/packages"
+                --with-expat="$PREFIX/packages" --without-crypto
             make -j$JOBS
             make install
 
@@ -352,7 +352,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
             CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
                 ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
-                --with-expat="$PREFIX/packages"
+                --with-expat="$PREFIX/packages" --without-crypto
             make -j$JOBS
             make install
 
