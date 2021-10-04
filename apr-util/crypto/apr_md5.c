@@ -699,9 +699,6 @@ APU_DECLARE(apr_status_t) apr_password_validate(const char *passwd,
                                                 const char *hash)
 {
     char sample[120];
-#if !defined(WIN32) && !defined(BEOS) && !defined(NETWARE)
-    char *crypt_pw;
-#endif
     if (!strncmp(hash, apr1_id, strlen(apr1_id))) {
         /*
          * The hash was created using our custom algorithm.
@@ -715,42 +712,7 @@ APU_DECLARE(apr_status_t) apr_password_validate(const char *passwd,
         /*
          * It's not our algorithm, so feed it to crypt() if possible.
          */
-#if defined(WIN32) || defined(BEOS) || defined(NETWARE)
         apr_cpystrn(sample, passwd, sizeof(sample) - 1);
-#elif defined(CRYPT_R_CRYPTD)
-        CRYPTD buffer;
-
-        crypt_pw = crypt_r(passwd, hash, &buffer);
-        apr_cpystrn(sample, crypt_pw, sizeof(sample) - 1);
-#elif defined(CRYPT_R_STRUCT_CRYPT_DATA)
-        struct crypt_data buffer;
-
-        /* having to clear this seems bogus... GNU doc is
-         * confusing...  user report found from google says
-         * the crypt_data struct had to be cleared to get
-         * the same result as plain crypt()
-         */
-        memset(&buffer, 0, sizeof(buffer));
-        crypt_pw = crypt_r(passwd, hash, &buffer);
-        apr_cpystrn(sample, crypt_pw, sizeof(sample) - 1);
-#else
-        /* Do a bit of sanity checking since we know that crypt_r()
-         * should always be used for threaded builds on AIX, and
-         * problems in configure logic can result in the wrong
-         * choice being made.
-         */
-#if defined(_AIX) && APR_HAS_THREADS
-#error Configuration error!  crypt_r() should have been selected!
-#endif
-
-        /* Handle thread safety issues by holding a mutex around the
-         * call to crypt().
-         */
-        crypt_mutex_lock();
-        crypt_pw = crypt(passwd, hash);
-        apr_cpystrn(sample, crypt_pw, sizeof(sample) - 1);
-        crypt_mutex_unlock();
-#endif
     }
     return (strcmp(sample, hash) == 0) ? APR_SUCCESS : APR_EMISMATCH;
 }
