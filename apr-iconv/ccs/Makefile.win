@@ -199,4 +199,4 @@ ALL_TARGETS = \
 REBASE_TOP = 0x6ED50000
 MODRES=$(OUTPUT_DIR)\ccsiconv
 
-!INCLUDE ../build/modules.mk.win
+!INCLUDE ..\build\modules.mk.win
