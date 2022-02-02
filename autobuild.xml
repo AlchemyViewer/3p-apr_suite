@@ -17,30 +17,16 @@
         <string>expat</string>
         <key>platforms</key>
         <map>
-          <key>darwin64</key>
-          <map>
-            <key>archive</key>
-            <map>
-              <key>hash</key>
-              <string>761ba58ed917e76289471796b0137c2ffc6e33c435bfe6850384c15019f20aadc40806783d106985b456e8e425e14abf01b1ce8386b762ad0d997d6a41d80770</string>
-              <key>hash_algorithm</key>
-              <string>blake2b</string>
-              <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.1.1301/expat-2.4.1-darwin64-1301.tar.zst</string>
-            </map>
-            <key>name</key>
-            <string>darwin64</string>
-          </map>
           <key>linux64</key>
           <map>
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>461dd82088eaef90df6062c949aa8b1f26dd0e1946b64282d507dcf7356a4c6e2aa84e19d37c5ae5ea114093d6d4db1fe06f6fbfee176a764f89d68a7bcb4f5c</string>
+              <string>323b0902b5f498902439240fc0f441108cba92d8525eae0aef06dd8cd8e62a52d3890906e85a1a12a836852ab01f7d12346e1967a9857769261955d477c68a25</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.1.1301/expat-2.4.1-linux64-1301.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.4.1433/expat-2.4.4-linux64-1433.tar.zst</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -50,18 +36,18 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>fcf4d43850bd18c2879ef010d464055a1b530a219e61b06500efe821c7091329562b8120a4575907e9a2af06de43d868fbea2436ca71450022eea81eb678f68b</string>
+              <string>bf6276f19477c949185ecc6d6164b10675630b5a9c5be6e995d0feda5320d2b2bfcfd9318f5e1d9b130b0f90f98458881f0b3456249331a3bbd4cb4f0e3edf85</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.1.1301/expat-2.4.1-windows64-1301.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.4.1433/expat-2.4.4-windows64-1433.tar.zst</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>2.4.1</string>
+        <string>2.4.4</string>
       </map>
     </map>
     <key>package_description</key>
