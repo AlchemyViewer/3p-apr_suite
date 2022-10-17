@@ -151,10 +151,10 @@
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>libapr-1</TargetName>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'">
     <OutDir>.\9x\Release\</OutDir>

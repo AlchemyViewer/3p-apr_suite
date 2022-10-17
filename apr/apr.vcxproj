@@ -138,24 +138,28 @@
     <IntDir>.\9x\LibD\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\x64\LibR\</OutDir>
-    <IntDir>.\x64\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apr-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\LibD\</OutDir>
-    <IntDir>.\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apr-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>.\x64\LibD\</OutDir>
-    <IntDir>.\x64\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apr-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'">
     <OutDir>.\9x\LibR\</OutDir>
     <IntDir>.\9x\LibR\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\LibR\</OutDir>
-    <IntDir>.\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apr-1</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug9x|Win32'">
     <ClCompile>
@@ -197,11 +201,12 @@
       <WarningLevel>Level3</WarningLevel>
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;./include/arch;./include/arch/win32;./include/arch/unix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;WIN32;WINNT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;WIN32;WINNT;_WINDOWS;XML_STATIC=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\x64\LibR\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\x64\LibR\apr.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apr-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -213,7 +218,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibR\apr-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -231,6 +235,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apr-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -242,7 +247,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibD\apr-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -260,6 +264,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apr-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -271,7 +276,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibD\apr-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release9x|Win32'">
@@ -320,6 +324,7 @@
       <PrecompiledHeaderOutputFile>.\LibR\apr.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apr-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -331,7 +336,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibR\apr-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

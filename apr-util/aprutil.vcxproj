@@ -94,20 +94,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>.\x64\LibD\</OutDir>
-    <IntDir>.\x64\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>aprutil-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\x64\LibR\</OutDir>
-    <IntDir>.\x64\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>aprutil-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\LibD\</OutDir>
-    <IntDir>.\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>aprutil-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\LibR\</OutDir>
-    <IntDir>.\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>aprutil-1</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -124,6 +128,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprutil-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -135,7 +140,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibD\aprutil-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,11 +153,12 @@
       <WarningLevel>Level3</WarningLevel>
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;../apr/include;./include/private;../apr-iconv/include;./dbm/sdbm;./xml/expat/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;APU_DECLARE_STATIC;API_DECLARE_STATIC;APU_USE_SDBM;HAVE_SQL_H;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;APU_DECLARE_STATIC;API_DECLARE_STATIC;APU_USE_SDBM;HAVE_SQL_H;XML_STATIC=1;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\x64\LibR\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\x64\LibR\aprutil.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprutil-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -165,7 +170,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibR\aprutil-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -183,6 +187,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprutil-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -194,7 +199,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibD\aprutil-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -213,6 +217,7 @@
       <PrecompiledHeaderOutputFile>.\LibR\aprutil.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprutil-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -224,7 +229,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibR\aprutil-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

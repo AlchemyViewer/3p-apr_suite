@@ -81,25 +81,25 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
     which nmake
 
-    for proj in libapr libaprutil libapriconv
-      do build_sln "apr-util/aprutil.sln" "Debug" "$AUTOBUILD_WIN_VSPLATFORM" "$proj"
+    for proj in apr aprutil apriconv
+      do build_sln "apr-util/aprutil.sln" "Debug|$AUTOBUILD_WIN_VSPLATFORM" "$proj"
     done
 
     mkdir -p "$DEBUG_OUT_DIR" || echo "$DEBUG_OUT_DIR exists"
 
-    cp "apr$bitdir/Debug/libapr-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
-    cp "apr-iconv$bitdir/Debug/libapriconv-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
-    cp "apr-util$bitdir/Debug/libaprutil-1."{lib,dll,exp,pdb} "$DEBUG_OUT_DIR"
+    cp "apr$bitdir/Debug/apr-1.lib" "$DEBUG_OUT_DIR"
+    cp "apr-iconv$bitdir/Debug/apriconv-1.lib" "$DEBUG_OUT_DIR"
+    cp "apr-util$bitdir/Debug/aprutil-1.lib" "$DEBUG_OUT_DIR"
 
-    for proj in libapr libaprutil libapriconv
-      do build_sln "apr-util/aprutil.sln" "Release" "$AUTOBUILD_WIN_VSPLATFORM" "$proj"
+    for proj in apr aprutil apriconv
+      do build_sln "apr-util/aprutil.sln" "Release|$AUTOBUILD_WIN_VSPLATFORM" "$proj"
     done
 
     mkdir -p "$RELEASE_OUT_DIR" || echo "$RELEASE_OUT_DIR exists"
 
-    cp "apr$bitdir/Release/libapr-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
-    cp "apr-iconv$bitdir/Release/libapriconv-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
-    cp "apr-util$bitdir/Release/libaprutil-1."{lib,dll,exp,pdb} "$RELEASE_OUT_DIR"
+    cp "apr$bitdir/Release/apr-1.lib" "$RELEASE_OUT_DIR"
+    cp "apr-iconv$bitdir/Release/apriconv-1.lib" "$RELEASE_OUT_DIR"
+    cp "apr-util$bitdir/Release/aprutil-1.lib" "$RELEASE_OUT_DIR"
 
     INCLUDE_DIR="$STAGING_DIR/include/apr-1"
     mkdir -p "$INCLUDE_DIR"      || echo "$INCLUDE_DIR exists"

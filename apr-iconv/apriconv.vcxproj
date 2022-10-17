@@ -94,20 +94,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\LibD\</OutDir>
-    <IntDir>.\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apriconv-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>.\x64\LibD\</OutDir>
-    <IntDir>.\x64\LibD\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apriconv-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\x64\LibR\</OutDir>
-    <IntDir>.\x64\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apriconv-1</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\LibR\</OutDir>
-    <IntDir>.\LibR\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <TargetName>apriconv-1</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -126,6 +130,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apriconv-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -136,7 +141,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibD\apriconv-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -156,6 +160,7 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apriconv-1</ProgramDataBaseFileName>
       <AdditionalOptions> /EHsc </AdditionalOptions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -166,7 +171,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibD\apriconv-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -180,13 +184,14 @@
       <WarningLevel>Level3</WarningLevel>
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;../apr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;API_DECLARE_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;API_DECLARE_STATIC;WIN32;_WINDOWS;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\x64\LibR\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\x64\LibR\apriconv.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>iconv.h</PrecompiledHeaderFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apriconv-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -197,7 +202,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>x64\LibR\apriconv-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -218,6 +222,7 @@
       <PrecompiledHeaderFile>iconv.h</PrecompiledHeaderFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)apriconv-1</ProgramDataBaseFileName>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -228,7 +233,6 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibR\apriconv-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
