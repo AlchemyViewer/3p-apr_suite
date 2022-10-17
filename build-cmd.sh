@@ -150,7 +150,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
         pushd "build_debug"
             CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
                 ../configure --enable-debug --prefix="$PREFIX_DEBUG"
-            make -j$JOBS
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -163,7 +163,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
         pushd "build_release"
             CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
                 ../configure --prefix="$PREFIX_RELEASE"
-            make -j$JOBS
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -193,7 +193,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
                 ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
                 --with-expat="$SDKROOT/usr"
-            make -j$JOBS
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -208,7 +208,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
                 ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
                 --with-expat="$SDKROOT/usr"
-            make -j$JOBS
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -257,8 +257,6 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     DEBUG_LDFLAGS="$opts"
     RELEASE_LDFLAGS="$opts"      
 
-    JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
-
     # Handle any deliberate platform targeting
     if [ -z "${TARGET_CPPFLAGS:-}" ]; then
         # Remove sysroot contamination from build environment
@@ -267,13 +265,6 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
         # Incorporate special pre-processing flags
         export CPPFLAGS="$TARGET_CPPFLAGS"
     fi
-
-    # Fix up path for pkgconfig
-    if [ -d "$STAGING_DIR/packages/lib/release/pkgconfig" ]; then
-        fix_pkgconfig_prefix "$STAGING_DIR/packages"
-    fi
-
-    OLD_PKG_CONFIG_PATH="${PKG_CONFIG_PATH:-}"
 
     PREFIX="$STAGING_DIR"
     PREFIX_DEBUG="$PREFIX/temp_debug"
@@ -287,12 +278,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
         mkdir -p "build_debug"
         pushd "build_debug"
-            # debug configure and build
-            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/debug/pkgconfig:${OLD_PKG_CONFIG_PATH}"
-
             CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
-                ../configure --enable-debug --prefix="$PREFIX_DEBUG"
-            make -j$JOBS
+                ../configure --enable-debug --disable-shared --enable-static --prefix="$PREFIX_DEBUG"
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -303,12 +291,9 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
 
         mkdir -p "build_release"
         pushd "build_release"
-            # debug configure and build
-            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/release/pkgconfig:${OLD_PKG_CONFIG_PATH}"
-
             CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
-                ../configure --prefix="$PREFIX_RELEASE"
-            make -j$JOBS
+                ../configure --disable-shared --enable-static --prefix="$PREFIX_RELEASE"
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -321,17 +306,18 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     pushd "$TOP_DIR/apr-util"
         autoreconf -fvi
 
+        cp -a $STAGING_DIR/packages/include/expat/*.h $STAGING_DIR/packages/include/
+
         mkdir -p "build_debug"
         pushd "build_debug"
-            # debug configure and build
-            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/debug/pkgconfig:${OLD_PKG_CONFIG_PATH}"
+            cp -a $STAGING_DIR/packages/lib/debug/*.a $STAGING_DIR/packages/lib
 
-            cp -a $STAGING_DIR/packages/lib/release/*.so* $STAGING_DIR/packages/lib
-
-            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
+            CFLAGS="$DEBUG_CFLAGS -L$STAGING_DIR/packages/include" \
+            CXXFLAGS="$DEBUG_CXXFLAGS -L$STAGING_DIR/packages/include" \
+            LDFLAGS="$DEBUG_LDFLAGS" \
                 ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
-                --with-expat="$PREFIX/packages" --without-crypto
-            make -j$JOBS
+                --with-expat="$PREFIX/packages" --without-crypto --disable-shared --enable-static
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -340,20 +326,19 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     make check
             # fi
 
-            rm $STAGING_DIR/packages/lib/*.so*
+            rm $STAGING_DIR/packages/lib/*.a
         popd
 
         mkdir -p "build_release"
         pushd "build_release"
-            # debug configure and build
-            export PKG_CONFIG_PATH="$STAGING_DIR/packages/lib/release/pkgconfig:${OLD_PKG_CONFIG_PATH}"
+            cp -a $STAGING_DIR/packages/lib/release/*.a $STAGING_DIR/packages/lib
 
-            cp -a $STAGING_DIR/packages/lib/release/*.so* $STAGING_DIR/packages/lib
-
-            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
+            CFLAGS="$RELEASE_CFLAGS -L$STAGING_DIR/packages/include" \
+            CXXFLAGS="$RELEASE_CXXFLAGS -L$STAGING_DIR/packages/include" \
+            LDFLAGS="$RELEASE_LDFLAGS" \
                 ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
-                --with-expat="$PREFIX/packages" --without-crypto
-            make -j$JOBS
+                --with-expat="$PREFIX/packages" --without-crypto --disable-shared --enable-static
+            make -j$AUTOBUILD_CPU_COUNT
             make install
 
             # conditionally run unit tests
@@ -362,7 +347,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     make check
             # fi
 
-            rm $STAGING_DIR/packages/lib/*.so*
+            rm $STAGING_DIR/packages/lib/*.a
         popd
     popd
 
@@ -370,18 +355,8 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     mkdir -p "$PREFIX/lib/debug"
     mkdir -p "$PREFIX/lib/release"
 
-    cp -a $PREFIX_DEBUG/lib/*.so* $PREFIX/lib/debug
-    cp -a $PREFIX_RELEASE/lib/*.so* $PREFIX/lib/release
-
-    pushd "$PREFIX/lib/debug"
-        chrpath -d libapr-1.so
-        chrpath -d libaprutil-1.so
-    popd
-
-    pushd "$PREFIX/lib/release"
-        chrpath -d libapr-1.so
-        chrpath -d libaprutil-1.so
-    popd
+    cp -a $PREFIX_DEBUG/lib/*.a $PREFIX/lib/debug
+    cp -a $PREFIX_RELEASE/lib/*.a $PREFIX/lib/release
 
     cp -a $PREFIX_RELEASE/include/* $PREFIX/include/
   ;;
