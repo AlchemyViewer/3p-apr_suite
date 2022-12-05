@@ -199,7 +199,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
         mkdir -p "build_release_arm64"
         pushd "build_release_arm64"
             CFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CFLAGS" CXXFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CXXFLAGS" LDFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_LDFLAGS" \
-                ../configure --disable-shared --enable-static --prefix="$PREFIX_RELEASE" --host=aarch64-apple-darwin
+                ../configure --disable-shared --enable-static --prefix="$PREFIX_RELEASE_ARM64" --host=aarch64-apple-darwin
             make -j$AUTOBUILD_CPU_COUNT
             make install
 
