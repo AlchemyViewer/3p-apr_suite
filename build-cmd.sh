@@ -319,7 +319,7 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     lipo -create ${STAGING_DIR}/temp_release_x86/lib/libaprutil-1.a ${STAGING_DIR}/temp_release_arm64/lib/libaprutil-1.a -output ${STAGING_DIR}/lib/release/libaprutil-1.a
 
     # copy headers
-    mv $STAGING_DIR/temp_release_x86/include/* $STAGING_DIR/include/expat/
+    mv $STAGING_DIR/temp_release_x86/include/* $STAGING_DIR/include/
   ;;
 
   linux*)
