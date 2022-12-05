@@ -118,38 +118,46 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     # Setup osx sdk platform
     SDKNAME="macosx"
     export SDKROOT=$(xcodebuild -version -sdk ${SDKNAME} Path)
-    export MACOSX_DEPLOYMENT_TARGET=10.15
+
+    # Deploy Targets
+    X86_DEPLOY=10.13
+    ARM64_DEPLOY=11.0
 
     # Setup build flags
-    ARCH_FLAGS="-arch x86_64"
-    SDK_FLAGS="-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} -isysroot ${SDKROOT}"
-    DEBUG_COMMON_FLAGS="$ARCH_FLAGS $SDK_FLAGS -O0 -g -msse4.2 -fPIC -DPIC"
-    RELEASE_COMMON_FLAGS="$ARCH_FLAGS $SDK_FLAGS -O3 -g -msse4.2 -fPIC -DPIC -fstack-protector-strong"
+    ARCH_FLAGS_X86="-arch x86_64 -mmacosx-version-min=${X86_DEPLOY} -isysroot ${SDKROOT}"
+    ARCH_FLAGS_ARM64="-arch arm64 -mmacosx-version-min=${ARM64_DEPLOY} -isysroot ${SDKROOT}"
+    DEBUG_COMMON_FLAGS="-O0 -g -fPIC -DPIC"
+    RELEASE_COMMON_FLAGS="-O3 -g -fPIC -DPIC -fstack-protector-strong"
     DEBUG_CFLAGS="$DEBUG_COMMON_FLAGS"
     RELEASE_CFLAGS="$RELEASE_COMMON_FLAGS"
     DEBUG_CXXFLAGS="$DEBUG_COMMON_FLAGS -std=c++17"
     RELEASE_CXXFLAGS="$RELEASE_COMMON_FLAGS -std=c++17"
     DEBUG_CPPFLAGS="-DPIC"
     RELEASE_CPPFLAGS="-DPIC"
-    DEBUG_LDFLAGS="$ARCH_FLAGS $SDK_FLAGS -Wl,-headerpad_max_install_names"
-    RELEASE_LDFLAGS="$ARCH_FLAGS $SDK_FLAGS -Wl,-headerpad_max_install_names"
+    DEBUG_LDFLAGS="-Wl,-headerpad_max_install_names"
+    RELEASE_LDFLAGS="-Wl,-headerpad_max_install_names"
 
-    JOBS=`sysctl -n hw.ncpu`
+    # x86 Deploy Target
+    export MACOSX_DEPLOYMENT_TARGET=${X86_DEPLOY}
 
     PREFIX="$STAGING_DIR"
-    PREFIX_DEBUG="$PREFIX/temp_debug"
-    PREFIX_RELEASE="$PREFIX/temp_release"
+    PREFIX_DEBUG_X86="$PREFIX/temp_debug_x86"
+    PREFIX_DEBUG_ARM64="$PREFIX/temp_debug_arm64"
+    PREFIX_RELEASE_X86="$PREFIX/temp_release_x86"
+    PREFIX_RELEASE_ARM64="$PREFIX/temp_release_arm64"
 
-    mkdir -p $PREFIX_DEBUG
-    mkdir -p $PREFIX_RELEASE
+    mkdir -p $PREFIX_DEBUG_X86
+    mkdir -p $PREFIX_DEBUG_ARM64
+    mkdir -p $PREFIX_RELEASE_X86
+    mkdir -p $PREFIX_RELEASE_ARM64
 
     pushd "$TOP_DIR/apr"
         autoreconf -fvi
 
-        mkdir -p "build_debug"
-        pushd "build_debug"
-            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
-                ../configure --enable-debug --prefix="$PREFIX_DEBUG"
+        mkdir -p "build_debug_x86"
+        pushd "build_debug_x86"
+            CFLAGS="$ARCH_FLAGS_X86 $DEBUG_CFLAGS -msse4.2" CXXFLAGS="$ARCH_FLAGS_X86 $DEBUG_CXXFLAGS -msse4.2" LDFLAGS="$ARCH_FLAGS_X86 $DEBUG_LDFLAGS" \
+                ../configure --enable-debug --disable-shared --enable-static --prefix="$PREFIX_DEBUG_X86" --host=x86_64-apple-darwin
             make -j$AUTOBUILD_CPU_COUNT
             make install
 
@@ -159,10 +167,10 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             # fi
         popd
 
-        mkdir -p "build_release"
-        pushd "build_release"
-            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
-                ../configure --prefix="$PREFIX_RELEASE"
+        mkdir -p "build_release_x86"
+        pushd "build_release_x86"
+            CFLAGS="$ARCH_FLAGS_X86 $RELEASE_CFLAGS -msse4.2" CXXFLAGS="$ARCH_FLAGS_X86 $RELEASE_CXXFLAGS -msse4.2" LDFLAGS="$ARCH_FLAGS_X86 $RELEASE_LDFLAGS" \
+                ../configure --disable-shared --enable-static --prefix="$PREFIX_RELEASE_X86" --host=x86_64-apple-darwin
             make -j$AUTOBUILD_CPU_COUNT
             make install
 
@@ -171,28 +179,62 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     make check
             # fi
         popd
+
+        # ARM64 Deploy Target
+        export MACOSX_DEPLOYMENT_TARGET=${ARM64_DEPLOY}
+
+        mkdir -p "build_debug_arm64"
+        pushd "build_debug_arm64"
+            CFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_CFLAGS" CXXFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_CXXFLAGS" LDFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_LDFLAGS" \
+                ../configure --enable-debug --disable-shared --enable-static --prefix="$PREFIX_DEBUG_ARM64" --host=aarch64-apple-darwin
+            make -j$AUTOBUILD_CPU_COUNT
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd
+
+        mkdir -p "build_release_arm64"
+        pushd "build_release_arm64"
+            CFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CFLAGS" CXXFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CXXFLAGS" LDFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_LDFLAGS" \
+                ../configure --disable-shared --enable-static --prefix="$PREFIX_RELEASE" --host=aarch64-apple-darwin
+            make -j$AUTOBUILD_CPU_COUNT
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     make check
+            # fi
+        popd        
     popd
 
-    pushd "$PREFIX_DEBUG/lib"
-        fix_dylib_id "libapr-1.dylib"
-        dsymutil libapr-*.*.dylib
-        strip -x -S libapr-*.*.dylib
-    popd
+    # pushd "$PREFIX_DEBUG/lib"
+    #     fix_dylib_id "libapr-1.dylib"
+    #     dsymutil libapr-*.*.dylib
+    #     strip -x -S libapr-*.*.dylib
+    # popd
 
-    pushd "$PREFIX_RELEASE/lib"
-        fix_dylib_id "libapr-1.dylib"
-        dsymutil libapr-*.*.dylib
-        strip -x -S libapr-*.*.dylib
-    popd
+    # pushd "$PREFIX_RELEASE/lib"
+    #     fix_dylib_id "libapr-1.dylib"
+    #     dsymutil libapr-*.*.dylib
+    #     strip -x -S libapr-*.*.dylib
+    # popd
 
     pushd "$TOP_DIR/apr-util"
         autoreconf -fvi
 
-        mkdir -p "build_debug"
-        pushd "build_debug"
-            CFLAGS="$DEBUG_CFLAGS" CXXFLAGS="$DEBUG_CXXFLAGS" LDFLAGS="$DEBUG_LDFLAGS" \
-                ../configure --prefix="$PREFIX_DEBUG" --with-apr="$PREFIX_DEBUG" \
-                --with-expat="$SDKROOT/usr"
+        # x86_64 Deploy Target
+        export MACOSX_DEPLOYMENT_TARGET=${X86_DEPLOY}
+
+        mkdir -p "build_debug_x86"
+        pushd "build_debug_x86"
+            cp -a $STAGING_DIR/packages/lib/debug/*.a $STAGING_DIR/packages/lib
+
+            CFLAGS="$ARCH_FLAGS_X86 $DEBUG_CFLAGS -msse4.2" CXXFLAGS="$ARCH_FLAGS_X86 $DEBUG_CXXFLAGS -msse4.2" LDFLAGS="$ARCH_FLAGS_X86 $DEBUG_LDFLAGS" \
+                ../configure --prefix="$PREFIX_DEBUG_X86" --with-apr="$PREFIX_DEBUG_X86" \
+                --with-expat="$PREFIX/packages" --disable-shared --enable-static --host=x86_64-apple-darwin
             make -j$AUTOBUILD_CPU_COUNT
             make install
 
@@ -201,13 +243,17 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
             #     make check
             # fi
+
+            rm $STAGING_DIR/packages/lib/*.a
         popd
 
-        mkdir -p "build_release"
-        pushd "build_release"
-            CFLAGS="$RELEASE_CFLAGS" CXXFLAGS="$RELEASE_CXXFLAGS" LDFLAGS="$RELEASE_LDFLAGS" \
-                ../configure --prefix="$PREFIX_RELEASE" --with-apr="$PREFIX_RELEASE" \
-                --with-expat="$SDKROOT/usr"
+        mkdir -p "build_release_x86"
+        pushd "build_release_x86"
+            cp -a $STAGING_DIR/packages/lib/release/*.a $STAGING_DIR/packages/lib
+
+            CFLAGS="$ARCH_FLAGS_X86 $RELEASE_CFLAGS -msse4.2" CXXFLAGS="$ARCH_FLAGS_X86 $RELEASE_CXXFLAGS -msse4.2" LDFLAGS="$ARCH_FLAGS_X86 $RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE_X86" --with-apr="$PREFIX_RELEASE_X86" \
+                --with-expat="$PREFIX/packages" --disable-shared --enable-static --host=x86_64-apple-darwin
             make -j$AUTOBUILD_CPU_COUNT
             make install
 
@@ -216,29 +262,64 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
             #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
             #     make check
             # fi
+
+            rm $STAGING_DIR/packages/lib/*.a
         popd
-    popd
 
-    pushd "$PREFIX_DEBUG/lib"
-        fix_dylib_id "libaprutil-1.dylib"
-        dsymutil libaprutil-*.*.dylib
-        strip -x -S libaprutil-*.*.dylib
-    popd
+        # ARM64 Deploy Target
+        export MACOSX_DEPLOYMENT_TARGET=${ARM64_DEPLOY}
 
-    pushd "$PREFIX_RELEASE/lib"
-        fix_dylib_id "libaprutil-1.dylib"
-        dsymutil libaprutil-*.*.dylib
-        strip -x -S libaprutil-*.*.dylib
+        mkdir -p "build_debug_arm64"
+        pushd "build_debug_arm64"
+            cp -a $STAGING_DIR/packages/lib/debug/*.a $STAGING_DIR/packages/lib
+
+            CFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_CFLAGS" CXXFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_CXXFLAGS" LDFLAGS="$ARCH_FLAGS_ARM64 $DEBUG_LDFLAGS" \
+                ../configure --prefix="$PREFIX_DEBUG_ARM64" --with-apr="$PREFIX_DEBUG_ARM64" \
+                --with-expat="$PREFIX/packages" --disable-shared --enable-static --host=aarch64-apple-darwin
+            make -j$AUTOBUILD_CPU_COUNT
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+
+            rm $STAGING_DIR/packages/lib/*.a
+        popd
+
+        mkdir -p "build_release_arm64"
+        pushd "build_release_arm64"
+            cp -a $STAGING_DIR/packages/lib/release/*.a $STAGING_DIR/packages/lib
+
+            CFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CFLAGS" CXXFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_CXXFLAGS" LDFLAGS="$ARCH_FLAGS_ARM64 $RELEASE_LDFLAGS" \
+                ../configure --prefix="$PREFIX_RELEASE_ARM64" --with-apr="$PREFIX_RELEASE_ARM64" \
+                --with-expat="$PREFIX/packages" --disable-shared --enable-static --host=aarch64-apple-darwin
+            make -j$AUTOBUILD_CPU_COUNT
+            make install
+
+            # conditionally run unit tests
+            # if [ "${DISABLE_UNIT_TESTS:-0}" = "0" ]; then
+            #     export DYLD_LIBRARY_PATH="$STAGING_DIR/packages/lib"
+            #     make check
+            # fi
+
+            rm $STAGING_DIR/packages/lib/*.a
+        popd
     popd
 
     mkdir -p "$PREFIX/include"
     mkdir -p "$PREFIX/lib/debug"
     mkdir -p "$PREFIX/lib/release"
 
-    cp -a $PREFIX_DEBUG/lib/*.dylib* $PREFIX/lib/debug
-    cp -a $PREFIX_RELEASE/lib/*.dylib* $PREFIX/lib/release
+    # create fat libraries
+    lipo -create ${STAGING_DIR}/temp_debug_x86/lib/libapr-1.a ${STAGING_DIR}/temp_debug_arm64/lib/libapr-1.a -output ${STAGING_DIR}/lib/debug/libapr-1.a
+    lipo -create ${STAGING_DIR}/temp_debug_x86/lib/libaprutil-1.a ${STAGING_DIR}/temp_debug_arm64/lib/libaprutil-1.a -output ${STAGING_DIR}/lib/debug/libaprutil-1.a
+    lipo -create ${STAGING_DIR}/temp_release_x86/lib/libapr-1.a ${STAGING_DIR}/temp_release_arm64/lib/libapr-1.a -output ${STAGING_DIR}/lib/release/libapr-1.a
+    lipo -create ${STAGING_DIR}/temp_release_x86/lib/libaprutil-1.a ${STAGING_DIR}/temp_release_arm64/lib/libaprutil-1.a -output ${STAGING_DIR}/lib/release/libaprutil-1.a
 
-    cp -a $PREFIX_RELEASE/include/* $PREFIX/include/
+    # copy headers
+    mv $STAGING_DIR/temp_release_x86/include/* $STAGING_DIR/include/expat/
   ;;
 
   linux*)

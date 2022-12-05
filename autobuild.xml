@@ -22,11 +22,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>8b36b7c62146d221e178c2c2555174ac2f7c0fe43b18e155948407dd0ae3fce8dd0ba4ea9205c248c60706f67b5db44db9e725b1216aad1a7e80cb38d7355e7a</string>
+              <string>46ce3f201f8020ad6cf5e6f0f9d5c4c72c11438c0c91444773cb2b8def290fdee10d29eb39f9668dd921aa80cbc6a3ee441b1c6bdd12be831c5e5ceec8e40d96</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.9.1600/expat-2.4.9-darwin64-1600.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1677/expat-2.5.0-darwin64-1677.tar.zst</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
@@ -36,11 +36,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>6896a2ee9c5e4a01ab20f6c2f16fac14cb9ec8a22417d16762ad25648b89289ba33d9cfc019959af63d39fa2d09fdc6385ae6f747ce828db3ae0adec1c4ab8fe</string>
+              <string>cded1fb0f4a6addafab3f384bf0e145121b54a7aa604d65b304061fce875297c3f0e5b90abb9b4797bb62907d6b25aa607de93d710bd13bf207f144304bc37f6</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.9.1600/expat-2.4.9-linux64-1600.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1677/expat-2.5.0-linux64-1677.tar.zst</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -50,18 +50,18 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>d2d135be4e1acaf7e639da4d63957e95e7b8c07c15e08379734615dda9529ed5d8bab3aefd6a2d0d55f8f7b047b9ca1405f793d303404812b39d55bdfcf80148</string>
+              <string>a753f5699a9c2b7a04977bd10718247269730d031418d3195003dc4833710be0dea6aaf6483f68118e0928d138c6ad0223a91e28999b3dd951df70bb7a0046e9</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.4.9.1600/expat-2.4.9-windows64-1600.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1677/expat-2.5.0-windows64-1677.tar.zst</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
         <key>version</key>
-        <string>2.4.9</string>
+        <string>2.5.0</string>
       </map>
     </map>
     <key>package_description</key>
@@ -125,8 +125,8 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/debug/*.dylib</string>
-            <string>lib/release/*.dylib</string>
+            <string>lib/debug/*.a</string>
+            <string>lib/release/*.a</string>
           </array>
           <key>name</key>
           <string>darwin</string>
