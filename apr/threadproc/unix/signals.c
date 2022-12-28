@@ -107,9 +107,19 @@ APR_DECLARE(apr_sigfunc_t *) apr_signal(int signo, apr_sigfunc_t * func)
 
 #endif /* HAVE_SIGACTION */
 
+#if HAVE_STRSIGNAL
+
+void apr_signal_init(apr_pool_t *pglobal)
+{
+}
+const char *apr_signal_description_get(int signum)
+{
+    return (signum >= 0) ? strsignal(signum) : "unknown signal (number)";
+}
+
 /* AC_DECL_SYS_SIGLIST defines either of these symbols depending
  * on the version of autoconf used. */
-#if defined(SYS_SIGLIST_DECLARED) || HAVE_DECL_SYS_SIGLIST
+#elif defined(SYS_SIGLIST_DECLARED) || HAVE_DECL_SYS_SIGLIST
 
 void apr_signal_init(apr_pool_t *pglobal)
 {

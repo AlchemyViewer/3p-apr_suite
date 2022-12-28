@@ -1368,6 +1368,11 @@ AC_SUBST(sendfile)
 AC_CHECK_FUNCS(sigaction, [ have_sigaction="1" ], [ have_sigaction="0" ]) 
 AC_DECL_SYS_SIGLIST
 
+AC_CHECK_DECL([strsignal],
+	[AC_DEFINE([HAVE_STRSIGNAL], [1],
+		[Define to 1 if have strsignal function prototype])],
+)
+
 AC_CHECK_FUNCS(fork, [ fork="1" ], [ fork="0" ])
 APR_CHECK_INET_ADDR
 APR_CHECK_INET_NETWORK

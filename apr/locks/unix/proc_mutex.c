@@ -381,8 +381,8 @@ static apr_status_t proc_mutex_proc_pthread_create(apr_proc_mutex_t *new_mutex,
     }
 
 #ifdef HAVE_PTHREAD_MUTEX_ROBUST
-    if ((rv = pthread_mutexattr_setrobust_np(&mattr, 
-                                               PTHREAD_MUTEX_ROBUST_NP))) {
+    if ((rv = pthread_mutexattr_setrobust(&mattr, 
+                                               PTHREAD_MUTEX_ROBUST))) {
 #ifdef HAVE_ZOS_PTHREADS
         rv = errno;
 #endif
@@ -437,7 +437,7 @@ static apr_status_t proc_mutex_proc_pthread_acquire(apr_proc_mutex_t *mutex)
 #ifdef HAVE_PTHREAD_MUTEX_ROBUST
         /* Okay, our owner died.  Let's try to make it consistent again. */
         if (rv == EOWNERDEAD) {
-            pthread_mutex_consistent_np(mutex->pthread_interproc);
+            pthread_mutex_consistent(mutex->pthread_interproc);
         }
         else
             return rv;
@@ -463,7 +463,7 @@ static apr_status_t proc_mutex_proc_pthread_tryacquire(apr_proc_mutex_t *mutex)
 #ifdef HAVE_PTHREAD_MUTEX_ROBUST
         /* Okay, our owner died.  Let's try to make it consistent again. */
         if (rv == EOWNERDEAD) {
-            pthread_mutex_consistent_np(mutex->pthread_interproc);
+            pthread_mutex_consistent(mutex->pthread_interproc);
             rv = APR_SUCCESS;
         }
         else
