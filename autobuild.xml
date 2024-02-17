@@ -1,20 +1,14 @@
 <?xml version="1.0" ?>
 <llsd>
 <map>
+    <key>version</key>
+    <string>1.3</string>
+    <key>type</key>
+    <string>autobuild</string>
     <key>installables</key>
     <map>
       <key>expat</key>
       <map>
-        <key>copyright</key>
-        <string>Copyright (c) 1998, 1999, 2000 Thai Open Source Software Center Ltd and Clark Cooper - Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006 Expat maintainers.</string>
-        <key>description</key>
-        <string>Expat is an XML parser library written in C</string>
-        <key>license</key>
-        <string>expat</string>
-        <key>license_file</key>
-        <string>LICENSES/expat.txt</string>
-        <key>name</key>
-        <string>expat</string>
         <key>platforms</key>
         <map>
           <key>darwin64</key>
@@ -22,11 +16,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>64e061836013151fbdf21545c50e0b7ffb51b83bdd95ba9a8f7b63a229824a8da6457b644c234eafaab13f21849413068123c79afce3ebe1b2cbca4e7974b586</string>
+              <string>ac3094ba82d277d8dba7175b0a020d78eefb276f074ba9e68873a91255c61d88c148896a9cf1e4465f0e3c5af674094387a15a44da1607b5940eea3a6d03fbfc</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1816/expat-2.5.0-darwin64-1816.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-darwin64-2377.tar.zst</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
@@ -36,11 +30,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>d640ea81458c0a26bc8c5385cd63e5b08f4ece5125ada07baddcaf775fac5baaf5d4b031207868836ae881dadb9748aa9c62224871cc72cfbdcb0260ab00b2f8</string>
+              <string>006d4765e212d1b29b2f12d7ffae4d4e4c84becca5c9b3d17b8f268c74887489a7237aee3b703593dbfb9ae6f916d9f8f85bcece5faa7a3f5040e431150ad07d</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1816/expat-2.5.0-linux64-1816.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-linux64-2377.tar.zst</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -50,52 +44,48 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>b2382a145a94fd0b5786d00fe29d43e680fe14f2bb19639f1b72e5330f7f7b2e39b610f26af9c8a06ff54ecf9db91051129e6edbb1ad15987260dfd1d4c48bde</string>
+              <string>b77cc400ef0fe407322666efa879ad08794e17a473281554b079d219069d22e19f26020fdbaf5edd0e4daee6bf29bfe04c4881d754603aa162c4c42c02521327</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.5.0.1816/expat-2.5.0-windows64-1816.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-windows64-2377.tar.zst</string>
             </map>
             <key>name</key>
             <string>windows64</string>
           </map>
         </map>
+        <key>license</key>
+        <string>expat</string>
+        <key>license_file</key>
+        <string>LICENSES/expat.txt</string>
+        <key>copyright</key>
+        <string>Copyright (c) 1998, 1999, 2000 Thai Open Source Software Center Ltd and Clark Cooper - Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006 Expat maintainers.</string>
         <key>version</key>
-        <string>2.5.0</string>
+        <string>2.6.0</string>
+        <key>name</key>
+        <string>expat</string>
+        <key>description</key>
+        <string>Expat is an XML parser library written in C</string>
       </map>
     </map>
     <key>package_description</key>
     <map>
-      <key>canonical_repo</key>
-      <string>https://git.alchemyviewer.org/alchemy/thirdparty/3p-apr_suite</string>
-      <key>copyright</key>
-      <string>Copyright © 2012 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.</string>
-      <key>description</key>
-      <string>Apache portable runtime project</string>
-      <key>license</key>
-      <string>apache</string>
-      <key>license_file</key>
-      <string>LICENSES/apr_suite.txt</string>
-      <key>name</key>
-      <string>apr_suite</string>
       <key>platforms</key>
       <map>
         <key>common</key>
         <map>
-          <key>build_directory</key>
-          <string>stage</string>
           <key>configurations</key>
           <map>
             <key>Release</key>
             <map>
               <key>build</key>
               <map>
+                <key>command</key>
+                <string>bash</string>
                 <key>arguments</key>
                 <array>
                   <string>../build-cmd.sh</string>
-                </array>
-                <key>command</key>
-                <string>bash</string>
+</array>
               </map>
               <key>name</key>
               <string>Release</string>
@@ -104,7 +94,9 @@
           <key>manifest</key>
           <array>
             <string>include/apr-1/*.h</string>
-          </array>
+</array>
+          <key>build_directory</key>
+          <string>stage</string>
           <key>name</key>
           <string>common</string>
         </map>
@@ -127,7 +119,7 @@
           <array>
             <string>lib/debug/*.a</string>
             <string>lib/release/*.a</string>
-          </array>
+</array>
           <key>name</key>
           <string>darwin</string>
         </map>
@@ -150,7 +142,7 @@
           <array>
             <string>lib/debug/*.a</string>
             <string>lib/release/*.a</string>
-          </array>
+</array>
           <key>name</key>
           <string>linux</string>
         </map>
@@ -175,17 +167,25 @@
             <string>include/apr-1/private/*.h</string>
             <string>lib/debug/*</string>
             <string>lib/release/*</string>
-          </array>
+</array>
           <key>name</key>
           <string>windows</string>
         </map>
       </map>
+      <key>license</key>
+      <string>apache</string>
+      <key>license_file</key>
+      <string>LICENSES/apr_suite.txt</string>
+      <key>copyright</key>
+      <string>Copyright © 2012 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.</string>
       <key>version_file</key>
       <string>VERSION.txt</string>
+      <key>name</key>
+      <string>apr_suite</string>
+      <key>canonical_repo</key>
+      <string>https://git.alchemyviewer.org/alchemy/thirdparty/3p-apr_suite</string>
+      <key>description</key>
+      <string>Apache portable runtime project</string>
     </map>
-    <key>type</key>
-    <string>autobuild</string>
-    <key>version</key>
-    <string>1.3</string>
   </map>
 </llsd>
