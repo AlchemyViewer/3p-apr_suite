@@ -463,7 +463,7 @@ changequote([, ])dnl
 AC_MSG_CHECKING(size of $2)
 AC_CACHE_VAL(AC_CV_NAME,
 [AC_TRY_RUN([#include <stdio.h>
-#include <stddef.h>
+#include <unistd.h>
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
@@ -524,7 +524,7 @@ AC_TRY_RUN([
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
-#include <stddef.h>
+#include <unistd.h>
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
