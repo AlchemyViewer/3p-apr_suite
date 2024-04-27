@@ -16,11 +16,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>ac3094ba82d277d8dba7175b0a020d78eefb276f074ba9e68873a91255c61d88c148896a9cf1e4465f0e3c5af674094387a15a44da1607b5940eea3a6d03fbfc</string>
+              <string>b2ab30c25b080dbd18b01828a75a6783efb086e77baa840d050f3175f1458bd15ca3a206bf4b8b2d5740f1d8cd56757c08f6b0df80d772c795170db41cabbf34</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-darwin64-2377.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.2.2465/expat-2.6.2-darwin64-2465.tar.zst</string>
             </map>
             <key>name</key>
             <string>darwin64</string>
@@ -30,11 +30,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>006d4765e212d1b29b2f12d7ffae4d4e4c84becca5c9b3d17b8f268c74887489a7237aee3b703593dbfb9ae6f916d9f8f85bcece5faa7a3f5040e431150ad07d</string>
+              <string>4bd7d8708f2c37700d4c311a8ef68228494a089fe44f04ad3c8c93770c0a38087c7b441143287c01e8b45987de04b1d2545562d36f0a56f027bb636270c5ecfd</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-linux64-2377.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.2.2465/expat-2.6.2-linux64-2465.tar.zst</string>
             </map>
             <key>name</key>
             <string>linux64</string>
@@ -44,11 +44,11 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>b77cc400ef0fe407322666efa879ad08794e17a473281554b079d219069d22e19f26020fdbaf5edd0e4daee6bf29bfe04c4881d754603aa162c4c42c02521327</string>
+              <string>573837e01290d6b773c8de2aadb6de13a1a237068df0d62ee25b55eae7f43ee2217353c685f2ae317ac12cd322308ca1235d8885fb386e21a4fa0501db0ab337</string>
               <key>hash_algorithm</key>
               <string>blake2b</string>
               <key>url</key>
-              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.0.2377/expat-2.6.0-windows64-2377.tar.zst</string>
+              <string>https://git.alchemyviewer.org/api/v4/projects/109/packages/generic/expat/2.6.2.2465/expat-2.6.2-windows64-2465.tar.zst</string>
             </map>
             <key>name</key>
             <string>windows64</string>
@@ -59,9 +59,9 @@
         <key>license_file</key>
         <string>LICENSES/expat.txt</string>
         <key>copyright</key>
-        <string>Copyright (c) 1998, 1999, 2000 Thai Open Source Software Center Ltd and Clark Cooper - Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006 Expat maintainers.</string>
+        <string>Copyright (c) 1998-2000 Thai Open Source Software Center Ltd and Clark Cooper - Copyright (c) 2001-2022 Expat maintainers</string>
         <key>version</key>
-        <string>2.6.0</string>
+        <string>2.6.2</string>
         <key>name</key>
         <string>expat</string>
         <key>description</key>
