@@ -183,7 +183,7 @@
       <key>name</key>
       <string>apr_suite</string>
       <key>canonical_repo</key>
-      <string>https://git.alchemyviewer.org/alchemy/thirdparty/3p-apr_suite</string>
+      <string>https://github.com/AlchemyViewer/3p-apr_suite</string>
       <key>description</key>
       <string>Apache portable runtime project</string>
     </map>
