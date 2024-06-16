@@ -133,9 +133,6 @@ if not any(frag in d for frag in ('CommonExtensions', 'VSPerfCollectionTools', '
     mkdir -p $PREFIX_RELEASE_X86
     mkdir -p $PREFIX_RELEASE_ARM64
 
-    # ARM64 Deploy Target
-    export MACOSX_DEPLOYMENT_TARGET=${ARM64_DEPLOY}
-
     pushd "$TOP_DIR/apr"
         autoreconf -fvi
 
